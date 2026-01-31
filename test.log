@@ -1,0 +1,36 @@
+--Declare
+area=1000|1000
+node=g0 type=ground group=0 color=255|0|0 buffer=5
+node=g1 type=ground group=0 color=255|0|0 buffer=5
+node=g2 type=ground group=0 color=255|0|0 buffer=5
+node=g3 type=ground group=0 color=255|0|0 buffer=5
+node=g4 type=ground group=0 color=255|0|0 buffer=5
+node=f5 type=ferry group=0 color=0|0|255 buffer=20 range=150|141.421 
+--Events 
+Time=0 
+event=pos node=g0 x=282.63 y=815.935
+event=pos node=g1 x=735.506 y=253.041
+event=pos node=g2 x=651.437 y=876.183
+event=pos node=g3 x=310.807 y=366.287
+event=pos node=g4 x=888.946 y=646.857
+event=pos node=f5 x=282.63 y=815.935
+event=route node=f5 tour=g0|g1|g2|g3|g4
+event=buffer node=f5 list=|
+Time=0.25
+event=pos node=f5 x=282.864 y=812.192
+Time=0.37531
+event=send source=f5 dest=g0 meta=BEACON
+Time=0.3762
+event=send source=g0 dest=f5 meta=HELLO
+event=buffer node=g0 list=0 why=create
+Time=0.38
+event=send source=f5 dest=g0 meta=BUNDLE
+event=buffer node=f5 list=0|2|3 why=receive
+Time=0.4012
+event=send source=g0 dest=f5 meta=BUNDLE_ACK
+event=buffer node=g0 list=| why=ack
+Time=0.5
+event=pos node=f5 x=283.099 y=808.45
+event=trip node=f5 tour=g0|g1|g2|g3|g4
+Time=0.61212
+event=buffer node=f5 list=2|3 why=drop

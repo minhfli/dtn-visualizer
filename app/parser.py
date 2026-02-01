@@ -72,8 +72,18 @@ def parse_events(lines):
 
     if current_time is not None:
         timeline.append(TimeFrame(current_time, current_events))
+    
+    timeline.sort(key=lambda tf: tf.time)
 
-    return timeline
+    merged = [] # merge timeFrame with equam times
+    for tf in timeline:
+        if not merged or merged[-1].time != tf.time:
+            merged.append(TimeFrame(tf.time, list(tf.events)))
+        else:
+            merged[-1].events.extend(tf.events)
+
+    return merged
+    # return timeline
 
 
 def parse_log_file(filename):

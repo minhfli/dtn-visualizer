@@ -162,6 +162,7 @@ class VisualizerApp:
             return
 
         self.selected_node = self.node_list.get(self.node_list.curselection())
+        self.selected_node = self.selected_node.split()[0]
         self.render()
 
     def update_node_list(self):

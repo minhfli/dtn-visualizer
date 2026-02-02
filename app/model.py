@@ -30,4 +30,4 @@ class Event:
 @dataclass
 class TimeFrame:
     time: float
-    events: list
+    events: list[Event]

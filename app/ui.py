@@ -3,13 +3,34 @@ import tkinter.font as tkfont
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 
+from app.model import Area, Node, TimeFrame
+
 from .canvas import CanvasView
 from .executor import EventExecutor
 
 
+# ? Step delay config
+class StepDelay:
+    def __init__(self, pos_update_delay=50, packet_send_delay=200):
+        self.pos_update_delay = pos_update_delay
+        self.packet_send_delay = packet_send_delay
+
+    def get_delay(self, events: list[str]):
+        if all(e == "pos" for e in events):
+            return self.pos_update_delay
+        return self.packet_send_delay
+
+
 class VisualizerApp:
 
-    def __init__(self, root, area, nodes, timeline, step_delay=400):
+    def __init__(
+        self,
+        root: tk.Tk,
+        area: Area | None,
+        nodes,
+        timeline: list[TimeFrame],
+        step_delay: StepDelay,
+    ):
         self.root = root
         self.area = area
         self.nodes = nodes
@@ -114,9 +135,13 @@ class VisualizerApp:
         self.executor.apply_events(tf.events)
         self.render()
 
+        events_type = [e.type for e in tf.events]
+
         self.index += 1
         if play_next:
-            self.after_id = self.root.after(self.step_delay, self._tick)
+            self.after_id = self.root.after(
+                self.step_delay.get_delay(events_type), self._tick
+            )
 
     def _apply_first_event(self):
         tf = self.timeline[0]
@@ -205,12 +230,7 @@ class VisualizerApp:
         else:
             self.info.config(text="")
 
-        for ev in self.timeline[self.index].events:
-            if ev.type == "send":
-                send_events.append(ev.data)
-                # print(ev.data)
-
-        self.canvas_view.redraw(route, send_events)
+        self.canvas_view.redraw(route, self.timeline[self.index].events)
         self.canvas.draw_idle()
 
     # ======================================================

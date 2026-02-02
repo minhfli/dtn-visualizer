@@ -2,7 +2,7 @@ import matplotlib.patches as patches
 import matplotlib.pyplot as plt
 from matplotlib.axes import Axes
 
-from app.model import Node
+from app.model import Event, Node
 
 
 class CanvasView:
@@ -93,13 +93,17 @@ class CanvasView:
     # Drawing
     # =====================================================
 
-    def redraw(self, highlight_route=None, send_events=[]):
+    def redraw(self, highlight_route=None, current_events: list[Event] = []):
         # 🔒 save camera BEFORE clearing
         xlim = self.ax.get_xlim()
         ylim = self.ax.get_ylim()
 
         self.ax.clear()
         self.ax.grid(True)
+
+        # ===== extract events =====
+        send_events = [e.data for e in current_events if e.type == "send"]
+        buffer_events = [e.data for e in current_events if e.type == "buffer"]
 
         # ===== draw nodes =====
         for node in self.nodes.values():
@@ -185,7 +189,27 @@ class CanvasView:
                 zorder=6,
             )
 
-        # 🔓 restore camera AFTER redraw
+        # ===== buffer events =====
+        for evnt in buffer_events:
+            node = self.nodes[evnt["node"]]
+            x, y = node.pos
+            self.ax.text(
+                x,
+                y + 5,
+                "BUFFER UPDATE",
+                color="brown",
+                fontsize=7,
+                ha="center",
+                va="center",
+                bbox=dict(
+                    boxstyle="round,pad=0.2",
+                    fc="white",
+                    ec="brown",
+                    alpha=0.7,
+                ),
+                zorder=6,
+            )
+        # restore camera AFTER redraw
         self.ax.set_xlim(xlim)
         self.ax.set_ylim(ylim)
         self.ax.set_aspect("equal", adjustable="box")

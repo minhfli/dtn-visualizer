@@ -8,6 +8,8 @@ def parse_kv(line: str):
             k, v = token.split("=", 1)
             if "|" in v:
                 result[k] = v.split("|")
+                # remove empty strings
+                result[k] = [x for x in result[k] if x != ""]
             else:
                 result[k] = v
     return result
@@ -72,10 +74,10 @@ def parse_events(lines):
 
     if current_time is not None:
         timeline.append(TimeFrame(current_time, current_events))
-    
+
     timeline.sort(key=lambda tf: tf.time)
 
-    merged = [] # merge timeFrame with equam times
+    merged = []  # merge timeFrame with equam times
     for tf in timeline:
         if not merged or merged[-1].time != tf.time:
             merged.append(TimeFrame(tf.time, list(tf.events)))

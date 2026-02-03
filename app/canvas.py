@@ -1,3 +1,4 @@
+from turtle import color
 import matplotlib.patches as patches
 import matplotlib.pyplot as plt
 from matplotlib.axes import Axes
@@ -93,7 +94,14 @@ class CanvasView:
     # Drawing
     # =====================================================
 
-    def redraw(self, highlight_route=None, current_events: list[Event] = []):
+    def redraw(
+        self,
+        highlight_route=None,
+        selected_node: str | None = None,
+        current_events: list[Event] = [],
+        buffer: list[str] = [],
+        beacon_nodes: list[str] = [],
+    ):
         # 🔒 save camera BEFORE clearing
         xlim = self.ax.get_xlim()
         ylim = self.ax.get_ylim()
@@ -137,21 +145,53 @@ class CanvasView:
                             r,
                             fill=False,
                             linestyle="--",
-                            alpha=0.5,
+                            alpha=0.2,
                             zorder=1,
                         )
                     )
 
+        for node in beacon_nodes:
+            x, y = self.nodes[node].pos
+            # draw circle
+            self.ax.add_patch(
+                patches.Circle(
+                    (x, y),
+                    r,
+                    fill=True,
+                    color="green",
+                    alpha=0.2,
+                    zorder=1,
+                )
+            )
         # ===== route highlight =====
         if highlight_route:
-            pts = [
-                self.nodes[n].pos
-                for n in highlight_route
-                if n in self.nodes and self.nodes[n].pos
-            ]
+            pts = []
+            pts.append(self.nodes[selected_node].pos)
+            for pos in highlight_route:
+                x = pos.split(":")[0]
+                y = pos.split(":")[1]
+                pts.append((float(x), float(y)))
+
             if len(pts) >= 2:
                 xs, ys = zip(*pts)
                 self.ax.plot(xs, ys, "r--", lw=2, zorder=4)
+
+        # ===== buffer highlight =====
+        for meta in buffer:
+            # meta
+            # 0: origin
+            # 1: destination
+            # 2: index
+            src = selected_node
+            dst = meta.split(":")[1]
+            # draw arrow from src to dst
+            self.ax.annotate(
+                "",
+                xy=self.nodes[dst].pos,
+                xytext=self.nodes[src].pos,
+                arrowprops=dict(arrowstyle="->", lw=1, color="gray"),
+                zorder=5,
+            )
 
         # ===== send events =====
         for evnt in send_events:

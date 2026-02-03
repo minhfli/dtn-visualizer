@@ -11,14 +11,23 @@ from .executor import EventExecutor
 
 # ? Step delay config
 class StepDelay:
-    def __init__(self, pos_update_delay=50, packet_send_delay=200):
+    def __init__(
+        self, pos_update_delay=5, buffer_update_delay=20, packet_send_delay=200
+    ):
         self.pos_update_delay = pos_update_delay
+        self.buffer_update_delay = buffer_update_delay
         self.packet_send_delay = packet_send_delay
 
     def get_delay(self, events: list[str]):
-        if all(e == "pos" for e in events):
-            return self.pos_update_delay
-        return self.packet_send_delay
+        delay = 0
+        for ev in events:
+            if ev == "pos" or ev == "route" or ev == "beacon":
+                delay = max(delay, self.pos_update_delay)
+            elif ev == "buffer":
+                delay = max(delay, self.buffer_update_delay)
+            else:
+                delay = max(delay, self.packet_send_delay)
+        return delay
 
 
 class VisualizerApp:
@@ -50,13 +59,13 @@ class VisualizerApp:
         left.pack(side=tk.LEFT, fill=tk.Y)
 
         self.play_btn = tk.Button(left, text="Play", command=self.toggle)
-        print(self.play_btn.cget("font"))
         self.play_btn.pack(fill=tk.X)
 
         tk.Button(left, text="Reset View", command=self.reset_view).pack(fill=tk.X)
         tk.Button(left, text="Back to Zero", command=self.back_to_zero).pack(fill=tk.X)
 
-        tk.Label(left, text="Timeline").pack()
+        self.timeline_label = tk.Label(left, text="Timeline")
+        self.timeline_label.pack(fill=tk.X)
 
         self.listbox = tk.Listbox(left)
         self.listbox.pack(fill=tk.BOTH, expand=True)
@@ -212,25 +221,38 @@ class VisualizerApp:
     def render(self):
         self.update_node_list()
 
+        self.timeline_label.config(text=f"Time: {self.timeline[self.index].time}")
         route = None
-        send_events = []
+        buffer = []
+        beacon_nodes = []
+
+        for ev in self.timeline[self.index].events:
+            if ev.type == "beacon":
+                beacon_nodes.append(ev.data["node"])
 
         if self.selected_node:
             n = self.nodes[self.selected_node]
             route = n.route
+            buffer = n.buffer
 
             self.info.config(
                 text=(
                     f"Node: {n.nid}\n"
                     f"Type: {n.type}\n"
                     f"Buffer: {len(n.buffer)}/{n.buffer_size}\n"
-                    f"Route: {n.route}"
+                    # f"Route: {n.route}"
                 )
             )
         else:
             self.info.config(text="")
 
-        self.canvas_view.redraw(route, self.timeline[self.index].events)
+        self.canvas_view.redraw(
+            route,
+            self.selected_node,
+            self.timeline[self.index].events,
+            buffer,
+            beacon_nodes,
+        )
         self.canvas.draw_idle()
 
     # ======================================================

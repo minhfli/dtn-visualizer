@@ -95,6 +95,7 @@ class VisualizerApp:
         self.node_list = tk.Listbox(right)
         self.node_list.pack(fill=tk.BOTH, expand=True)
 
+        self.node_list.insert(tk.END, "none")
         for nid in nodes:
             self.node_list.insert(tk.END, nid)
 
@@ -197,6 +198,8 @@ class VisualizerApp:
 
         self.selected_node = self.node_list.get(self.node_list.curselection())
         self.selected_node = self.selected_node.split()[0]
+        if self.selected_node == "none":
+            self.selected_node = None
         self.render()
 
     def update_node_list(self):
@@ -205,7 +208,7 @@ class VisualizerApp:
         if self.node_list.curselection():
             selected = self.node_list.get(self.node_list.curselection())
 
-        self.node_list.delete(0, tk.END)
+        self.node_list.delete(1, tk.END)
 
         for nid, node in self.nodes.items():
             label = f"{nid}  [{len(node.buffer)}/{node.buffer_size}]"

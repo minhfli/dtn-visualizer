@@ -122,14 +122,14 @@ class CanvasView:
             c = tuple(v / 255 for v in node.color)
 
             self.ax.scatter(x, y, s=60, c=[c], zorder=3)
-            self.ax.text(x + 5, y + 5, node.nid, fontsize=9)
+            self.ax.text(x + 15, y - 5, node.nid, fontsize=9)
 
             # ----- buffer bar -----
             if node.buffer_size > 0:
-                ratio = len(node.buffer) / node.buffer_size
+                ratio = len(node.buffer)
                 self.ax.bar(
-                    x + 12,
-                    ratio * 100,
+                    x - 25,
+                    ratio * 10,
                     width=20,
                     bottom=y - 15,
                     color="gray",
@@ -184,13 +184,18 @@ class CanvasView:
             # 2: index
             src = selected_node
             dst = meta.split(":")[1]
-            # draw arrow from src to dst
-            self.ax.annotate(
-                "",
-                xy=self.nodes[dst].pos,
-                xytext=self.nodes[src].pos,
-                arrowprops=dict(arrowstyle="->", lw=1, color="gray"),
-                zorder=5,
+            ## draw arrow from src to dst
+            # self.ax.annotate(
+            #     "",
+            #     xy=self.nodes[dst].pos,
+            #     xytext=self.nodes[src].pos,
+            #     arrowprops=dict(arrowstyle="->", lw=1, color="gray"),
+            #     zorder=5,
+            # )
+            ## hightlight dst node
+            x, y = self.nodes[dst].pos
+            self.ax.scatter(
+                x, y, s=1000, facecolors="none", edgecolors="orange", zorder=4
             )
 
         # ===== send events =====
@@ -206,7 +211,7 @@ class CanvasView:
                 xy=dst.pos,
                 xytext=src.pos,
                 arrowprops=dict(arrowstyle="->", lw=1, color="blue"),
-                zorder=5,
+                zorder=10,
             )
             # metadata text (middle of arrow)
             mx = (x1 + x2) / 2
@@ -226,7 +231,7 @@ class CanvasView:
                     ec="green",
                     alpha=0.7,
                 ),
-                zorder=6,
+                zorder=11,
             )
 
         # ===== buffer events =====

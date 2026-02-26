@@ -2,6 +2,7 @@ import tkinter as tk
 import tkinter.font as tkfont
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
+import bisect
 
 from app.model import Area, Node, TimeFrame
 
@@ -63,6 +64,13 @@ class VisualizerApp:
 
         tk.Button(left, text="Reset View", command=self.reset_view).pack(fill=tk.X)
         tk.Button(left, text="Back to Zero", command=self.back_to_zero).pack(fill=tk.X)
+
+        tk.Label(left, text="Jump to time (sec)").pack(fill=tk.X)
+
+        self.time_entry = tk.Entry(left)
+        self.time_entry.pack(fill=tk.X)
+
+        tk.Button(left, text="Go", command=self.jump_to_time).pack(fill=tk.X)
 
         self.timeline_label = tk.Label(left, text="Timeline")
         self.timeline_label.pack(fill=tk.X)
@@ -216,6 +224,37 @@ class VisualizerApp:
 
             if selected and label.startswith(selected.split()[0]):
                 self.node_list.selection_set(tk.END)
+
+    def find_index_by_time(self, t: float):
+        """
+        Trả về index của timeframe có time lớn nhất <= t
+        Nếu tất cả time > t → trả về 0
+        """
+        times = [tf.time for tf in self.timeline]
+
+        pos = bisect.bisect_right(times, t)
+
+        if pos == 0:
+            return 0
+
+        return pos - 1
+
+    def jump_to_time(self):
+        try:
+            t = float(self.time_entry.get())
+        except ValueError:
+            return
+
+        self.pause()
+
+        target_index = self.find_index_by_time(t)
+
+        self.replay_to(target_index)
+
+        # cập nhật selection trong listbox
+        self.listbox.selection_clear(0, tk.END)
+        self.listbox.selection_set(target_index)
+        self.listbox.see(target_index)
 
     # ======================================================
     # Rendering

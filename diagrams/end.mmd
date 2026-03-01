@@ -1,0 +1,18 @@
+sequenceDiagram
+    participant Ferry1
+    participant Ferry2
+
+    activate Ferry2
+    Ferry2->>Ferry1: ACCEPT TRANSFER
+    deactivate Ferry2
+
+    note over Ferry1,Ferry2: END1
+
+    activate Ferry2
+    Ferry2->>Ferry1: BUNDLE
+    deactivate Ferry2
+
+    activate Ferry1
+    Ferry1->>Ferry2: ACK 
+    deactivate Ferry1
+    note over Ferry1,Ferry2: END2

@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant Ferry1
+    participant Ferry2
+
+    Ferry1-->>Ferry2: BEACON
+    Ferry2-->>Ferry1: BEACON
+
+    Ferry1->>Ferry2: HELLO (route, buffer_state, visit_time)
+    Ferry2->>Ferry1: HELLO
+
+    activate Ferry1
+    note left of Ferry1: if Ferry2 is full
+    Ferry1->>Ferry2: ACCEPT TRANSFER
+    deactivate Ferry1
+    activate Ferry2
+    note right of Ferry2: Ferry2 have the transfer turn
+    Ferry2->>Ferry1: BUNDLE
+    deactivate Ferry2
+    
+
+    note left of Ferry1: else, Ferry1 have the transfer turn
+    activate Ferry1
+    Ferry1->>Ferry2: BUNDLE
+    deactivate Ferry1

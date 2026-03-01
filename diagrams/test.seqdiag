@@ -1,0 +1,16 @@
+
+participant Ferry1
+participant Ferry2
+
+Ferry1->Ferry2:BEACON
+Ferry2->Ferry1:BEACON
+
+
+Ferry1->Ferry2:HELLO\nroute\nbufferstate\nvisittime
+Ferry2->Ferry1:HELLO
+
+
+
+
+
+note left of Ferry2: END

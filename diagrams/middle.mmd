@@ -1,0 +1,34 @@
+sequenceDiagram
+    participant Ferry1
+    participant Ferry2
+
+    activate Ferry1
+    Ferry1->>Ferry2: BUNDLE
+    deactivate Ferry1
+
+    activate Ferry2
+    Ferry2->>Ferry1: ACK
+    Ferry2->>Ferry1: BUNDLE
+    deactivate Ferry2
+
+    activate Ferry1
+    Ferry1->>Ferry2: ACK
+    Ferry1->>Ferry2: BUNDLE
+    deactivate Ferry1
+
+    activate Ferry2
+    Ferry2->>Ferry1: ACK
+    Ferry2->>Ferry1: BUNDLE
+    deactivate Ferry2
+
+    activate Ferry1
+    Ferry1->>Ferry2: ACK + ACCEPT TRANSFER
+    deactivate Ferry1
+
+    activate Ferry2
+    Ferry2->>Ferry1: BUNDLE
+    deactivate Ferry2
+
+    activate Ferry1
+    Ferry1->>Ferry2: ACK + ACCEPT TRANSFER
+    deactivate Ferry1

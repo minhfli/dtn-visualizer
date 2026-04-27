@@ -1,0 +1,33 @@
+---
+config:
+  theme: redux-color
+  sequence:
+    actorMargin: 200
+---
+sequenceDiagram
+    %% autonumber
+    participant A as Token Owner (A)
+    participant B as Peer (B)
+
+    Note over A: *START
+
+    %% Note over A, B: Giai đoạn 1: Gửi dữ liệu và trao Token
+    alt A KHÔNG CÓ thông điệp cần gửi
+        Note over A,B: Giao thức kết thúc
+    else
+        A->>B: BUNDLE (Dữ liệu + Token)
+        Note over A: A trở thành Peer
+
+        alt B có thông điệp cần gửi
+            B-->>A: BUNDLE-ACK
+            Note over B: B trở thành Token Owner,<br>Quay lại *START
+            
+        else B không có thông điệp & bộ đệm ĐẦY
+            B-->>A: BUNDLE-ACK
+            Note over A, B: Giao thức kết thúc
+            
+        else B không có thông điệp & bộ đệm CHƯA ĐẦY
+            B-->>A: BUNDLE-ACK-ATT (Trả lại Token)
+            Note over A: A trở thành Token Owner,<br>Quay lại *START
+        end
+    end

@@ -15,6 +15,6 @@ if __name__ == "__main__":
     root = tk.Tk()
     root.option_add("*Font", tkfont.Font(family="DejaVu Sans", size=11))
     area, nodes, timeline = parse_log_file(LOG_FILE)
-    delay_config = StepDelay(1, 1, 250)
+    delay_config = StepDelay(1, 1, 100)
     ui = VisualizerApp(root, area, nodes, timeline, delay_config)
     root.mainloop()

@@ -1,3 +1,5 @@
+from math import dist
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
@@ -8,16 +10,16 @@ import os
 # ===============================
 # Configuration defaults
 # ===============================
-DEFAULT_N = 30
+DEFAULT_N = 45
 DEFAULT_K = 320.0
-DEFAULT_SEED = 2004
+DEFAULT_SEED = 133142314
 DEFAULT_OUTPUT = "points_relaxed.txt"
 DEFAULT_IMAGE = "flood2.png"
 
-X_MIN = 100
-X_MAX = 3900
-Y_MIN = 100
-Y_MAX = 3900
+X_MIN = 0
+X_MAX = 4000
+Y_MIN = 0
+Y_MAX = 4000
 
 
 # ===============================
@@ -43,109 +45,11 @@ def generate_points(n, k, seed):
     return np.array(points)
 
 
-# ===============================
-# Force Relaxation
-# ===============================
-def relax(points, k, iterations=50, step=0.1):
-    n = len(points)
-
-    for _ in range(iterations):
-        forces = np.zeros_like(points)
-
-        for i in range(n):
-            for j in range(i + 1, n):
-                dx = points[i] - points[j]
-                dist = np.linalg.norm(dx)
-
-                if dist < 1e-5:
-                    continue
-
-                if dist < k:
-                    # repulsive force
-                    direction = dx / dist
-                    magnitude = (k - dist) / k
-                    force = direction * magnitude
-
-                    forces[i] += force
-                    forces[j] -= force
-
-        points += step * forces
-
-        # Clamp boundary
-        points[:, 0] = np.clip(points[:, 0], X_MIN, X_MAX)
-        points[:, 1] = np.clip(points[:, 1], Y_MIN, Y_MAX)
-
-    return points
-
-
-# ===============================
-# Interactive Editor
-# ===============================
-class DTNEditor:
-    def __init__(self, points, k, image_path, output):
-        self.points = points
-        self.k = k
-        self.output = output
-        self.selected = None
-
-        self.fig, self.ax = plt.subplots(figsize=(8, 8))
-
-        if image_path and os.path.exists(image_path):
-            img = mpimg.imread(image_path)
-            self.ax.imshow(img, extent=(0, 4000, 0, 4000))
-
-        self.scatter = self.ax.scatter(points[:, 0], points[:, 1])
-        self.ax.set_xlim(0, 4000)
-        self.ax.set_ylim(0, 4000)
-        self.ax.set_aspect("equal")
-
-        self.fig.canvas.mpl_connect("button_press_event", self.on_press)
-        self.fig.canvas.mpl_connect("motion_notify_event", self.on_motion)
-        self.fig.canvas.mpl_connect("button_release_event", self.on_release)
-        self.fig.canvas.mpl_connect("key_press_event", self.on_key)
-
-    def redraw(self):
-        self.scatter.set_offsets(self.points)
-        self.fig.canvas.draw_idle()
-
-    def find_nearest(self, x, y):
-        dists = np.hypot(self.points[:, 0] - x, self.points[:, 1] - y)
-        idx = np.argmin(dists)
-        if dists[idx] < 100:
-            return idx
-        return None
-
-    def on_press(self, event):
-        if event.inaxes != self.ax:
-            return
-        self.selected = self.find_nearest(event.xdata, event.ydata)
-
-    def on_motion(self, event):
-        if self.selected is None or event.inaxes != self.ax:
-            return
-
-        self.points[self.selected] = [event.xdata, event.ydata]
-        self.points = relax(self.points, self.k, iterations=10)
-        self.redraw()
-
-    def on_release(self, event):
-        self.selected = None
-
-    def on_key(self, event):
-        if event.key == "s":
-            self.save()
-        elif event.key == "r":
-            self.points = relax(self.points, self.k, iterations=100)
-            self.redraw()
-        elif event.key == "q":
-            plt.close(self.fig)
-
-    def save(self):
-        with open(self.output, "w") as f:
-            f.write("id,x,y\n")
-            for i, (x, y) in enumerate(self.points):
-                f.write(f"{i},{x:.2f},{y:.2f}\n")
-        print(f"Saved to {self.output}")
+def plot(points):
+    plt.figure(figsize=(8, 8))
+    plt.scatter(points[:, 0], points[:, 1], c="blue", marker="o")
+    plt.xlim(X_MIN, X_MAX)
+    plt.show()
 
 
 # ===============================
@@ -161,11 +65,32 @@ def main():
 
     args = parser.parse_args()
 
-    points = generate_points(args.n, args.k, args.seed)
+    max_max_distance = 0
+    max_average_distance = 0
 
-    editor = DTNEditor(points, args.k, args.image, args.output)
-    plt.title("Drag points | S=save | R=relax | Q=quit")
-    plt.show()
+    for i in range(1000):
+        seed = random.random()
+        points = generate_points(args.n, args.k, seed)
+
+        max_distance = 0
+        average_distance = 0
+        for i in range(len(points)):
+            for j in range(i + 1, len(points)):
+                distance = np.hypot(
+                    points[i][0] - points[j][0], points[i][1] - points[j][1]
+                )
+                max_distance = max(max_distance, distance)
+                average_distance += distance
+
+        average_distance /= len(points) * (len(points) - 1) / 2
+
+        max_max_distance = max(max_max_distance, max_distance)
+        max_average_distance = max(max_average_distance, average_distance)
+
+    # plot final generated points
+    plot(points)
+    print("Average distance:", max_average_distance)
+    print("Max distance:", max_max_distance)
 
 
 if __name__ == "__main__":

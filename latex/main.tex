@@ -1,0 +1,834 @@
+\documentclass[a4paper]{article}
+\usepackage[fontsize=13pt]{scrextend}
+
+% Hỗ trợ tiếng Việt
+\usepackage[T5]{fontenc}
+\usepackage[utf8]{inputenc}
+% \usepackage{mathptmx}
+\usepackage[vietnamese]{babel}
+
+% Các gói cần thiết
+
+\usepackage{parskip}
+\usepackage{graphicx} 
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{scrextend}
+\usepackage{array}
+\usepackage{float}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{relsize}
+\usepackage{fancyhdr} 
+\usepackage{url}
+\usepackage{setspace}
+\usepackage{makecell}
+\usepackage{enumitem}
+\usepackage{changepage}
+\usepackage{tabularx}
+\usepackage[super]{nth}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage[titles]{tocloft}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{circuitikz}
+\usepackage{rotating}
+\usepackage{hyperref}
+\usepackage{subfiles}
+\usepackage{csquotes}
+\usepackage{biblatex}
+\usetikzlibrary{calc}
+\usepackage{soul}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{subfig}
+% Thiết lập margin
+\usepackage[left=3cm, right=2cm, top=2.5cm, bottom=3cm]{geometry}
+\addbibresource{ref.bib}
+
+% \setlength{\parindent}{1.5em}
+\setstretch{1.3}
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{1cm}
+% Thiết lập hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={},
+    pdfauthor={},
+}
+
+
+\title{}
+\author{Vũ Văn Minh}
+\date{\today}
+
+\begin{document}
+
+% Places a dot after Chapter/Section/Subsection number in Table of Contents
+\renewcommand{\appendixname}{Chương}
+\renewcommand{\contentsname}{Mục lục}
+\renewcommand{\listtablename}{Danh sách bảng}
+\renewcommand{\listfigurename}{Danh sách hình ảnh}
+\renewcommand{\listalgorithmname}{Danh sách thuật toán}
+\renewcommand{\tablename}{Bảng}
+\renewcommand{\figurename}{Hình}
+
+% Đổi tên caption "Algorithm"
+\floatname{algorithm}{Thuật toán}
+% Đổi Require / Ensure
+\algrenewcommand\algorithmicrequire{\textbf{Đầu vào:}}
+\algrenewcommand\algorithmicensure{\textbf{Đầu ra:}}
+
+\newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
+\renewcommand{\cftsecaftersnum}{.}
+\renewcommand{\cftsubsecaftersnum}{.}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\newenvironment{zeroindent}
+  {\par\setlength{\parindent}{0pt}}
+  {\par}
+
+\newenvironment{thankpage}{}{}
+\newcommand{\quotes}[1]{``#1''}
+
+\subfile{title.tex}
+\subfile{title2.tex}
+\subfile{thanks.tex}
+
+\phantomsection
+\addcontentsline{toc}{section}{Tóm tắt}
+\fontsize{13pt}{16.9pt}\selectfont  % 16.9 ≈ 1.3 line spacing
+
+{\huge \bfseries {Tóm tắt}}
+
+- Mạng chịu trễ
+
+- UAV
+
+- Pathplanning
+
+\newpage
+\begingroup
+\centering
+\tableofcontents
+\endgroup
+\pagebreak
+\listoftables
+\listoffigures
+\listofalgorithms
+\newpage
+
+% * Phần 1 ===============================================================
+\section{Giới thiệu}
+\subsection{Bối cảnh và mục tiêu nghiên cứu}
+Trong các kịch bản hậu thảm họa, điển hình lũ lụt tại các tỉnh miền Trung Việt Nam, hạ tầng mạng truyền thống thường bị hư hại nghiêm trọng hoặc mất hoàn toàn, dẫn đến tình trạng các nút mạng bị cô lập. 
+Các nút này có thể đại diện cho các cụm dân cư, trung tâm cứu hộ, hoặc các điểm trú ẩn tạm thời. Trong bối cảnh đó, nhu cầu trao đổi thông tin giữa các nút bị cô lập này trở nên cấp thiết, phục vụ cho công tác cứu hộ và điều phối nguồn lực.
+
+Sự phát triển của các thiết bị bay không người lái mở ra khả năng thiết lập một hạ tầng mạng tạm thời dựa trên mô hình mạng chịu trễ, trong đó UAV đóng vai trò như các người đưa thư, đi thu thập và truyền thông điệp giữa các nút bị cô lập.
+
+Mục tiêu nghiên cứu của đề tài này gồm 2 phần chính, là đề xuất một giao thức trao đổi gói tin giữa các nút trong mạng và xoáy sâu vào việc quy hoạch lộ trình và định tuyến cho những "người đưa thư" uav. Đó là đề xuất thuật toán quy hoạch lộ trình H-mTSP-RE được xây dựng trên các thuật toán tôi ưu hóa. Kèm theo so sánh và đánh giá với các nghiên cứu trước đó trên các tiêu chí như Tỉ lệ truyền thành công (Delivery Ratio), Số cặp không thể truyền thành công (Dead Connection), Số cặp có tỉ lệ truyền thành công thấp (Low Connection) và Độ trễ trung bình (Average Top x\% Delay).
+
+\subsection{Phạm vi và giới hạn của đề tài}
+\subsubsection{Phạm vi nghiên cứu}
+Đồ án này tập trung vào việc phát triển và đánh giá H-mTSP-RE trên môi trường mô phỏng ns3
+\begin{itemize}
+  \item {\bfseries Miền ứng dụng:} Đề tài tập trung vào quy hoạch lộ trình cho các UAV và đề xuất giao thức trao đổi với mục tiêu hỗ trợ truyền thông điệp giữa các nút mạng bị cô lập.
+  \item {\bfseries Phương pháp:} Đồ án thiết kế một giao thức trao đổi thông diệp giữa 2 nút mạng và đề xuất phương án quy hoạch lộ trình 2 pha "Hub m-Traveling Saleman Problem and Route Extend" áp dụng các thuật toán tối ưu hóa.
+  \item {\bfseries Đối chứng và cấu hình thực nghiệm:} Các nút mặt đất bị cô lập được tạo ra ngẫu nhiên dựa trên quan sát từ thực tế. Đề tài so sánh H-mTSP-RE với:
+  \begin{itemize}
+    \item SIRA / Single Route: baseline với các UAV di chuyển theo một lộ trình TSP qua tất cả các nút.
+    \item DTP-TSP-D: một phương án sử dụng thông tin về hạn (deadline) của các thông điệp để quy hoạch lộ trình.
+    \item TaBaf và FPOD: hai phương án này quy hoạch lộ trình của UAV một cách cơ hội, ngay trong khi đang thực hiện nhiệm vụ (on the fly) dựa trên khoảng cách, các thông điệp trong bộ đệm, ...
+  \end{itemize}
+  \item {\bfseries Đánh giá:} Để đánh giá hiệu năng của các phương pháp trong từng kịch bản, cần các thước đo như Tỉ lệ truyền thành công, Số cặp không thể truyền thành công, Số cặp có tỉ lệ truyền thành công thấp và Độ trễ trung bình.
+
+\end{itemize}
+\subsubsection{Giới hạn của đề tài}
+
+\subsection{Đóng góp chính của đề tài}
+\subsection{Cấu trúc của đồ án}
+
+% * Phần 2 ===============================================================
+\section{Cơ sở lý thuyết và các nghiên cứu liên quan}
+\subsection{Delay Tolerant Network và Message Ferry Network}
+\subsubsection{Delay Tolerant Network}
+Mạng truyền thống như TCP/IP hoạt động dựa trên một giả định cốt lõi, đó là luôn tồn tại một đường kết nối liên tục từ nguồn đến đích (end-to-end) trong quá trình truyền dữ liệu. Nếu liên kết bị đứt, các gói tin sẽ bị hủy bỏ và kết nối thất bại.
+
+Delay/Disruption Tolerant Networking là một phương pháp kiến trúc mạng máy tính nhằm giải quyết các vấn đề kỹ thuật trong các mạng không đồng nhất nơi việc mất kết nối liên tục xảy ra và tại một thời điểm nhất định, có thể không tồn tại một đường truyền đầu-cuối giữa hai nút cần trao đổi.
+Ví dụ như những mạng hoạt động trong môi trường di động (Vehicular Network) hoặc môi trường khắc nghiệt trên mặt đất,  hoặc các mạng trong không gian (Interplanetary network).
+
+DTN ban đầu được phát triển để sử dụng liên hành tinh, nơi khả năng chịu đựng độ trễ là nhu cầu lớn nhất. Tuy nhiên, DTN có thể có nhiều ứng dụng đa dạng hơn trên Trái đất, trải rộng trên nhiều lĩnh vực như thương mại, khoa học, quân sự và dịch vụ công cộng
+
+\subsubsection{Bundle Protocol}
+Giao thức Bundle (Bundle Protocol – BP) là trái tim trong kiến trúc mạng chịu trễ. BP được thiết kế như một lớp giao thức phủ nằm phía trên tầng giao vận (transport layer) và dưới tầng ứng dụng (application layer). 
+Việc truyền tải dữ liệu được thực hiện thông qua các giao thức giao vận bên dưới như TCP, UDP hoặc các giao thức truyền thông vô tuyến chuyên biệt. Tầng bundle và tầng giao vận được kết nối bởi một tầng trung gian gọi là tầng hội tụ (Convergence Layer).
+
+Khác với mô hình mạng IP truyền thống, nơi dữ liệu được phân mảnh thành các gói tin (packet) có kích thước nhỏ, BP tổ chức dữ liệu thành các đơn vị lớn gọi là “bundle”, có thể hiểu là một thông điệp hoàn chỉnh mà một nút muốn gửi đến nút khác. 
+Mỗi bundle bao gồm phần dữ liệu (payload) và các thông tin (metadata) cần thiết cho việc định tuyến và quản lý.
+Thay vì phân mảnh thông điệp thành các packet và ghép chúng lại ở nút đích, các bundle được gửi theo từng chặng, giữa hai nút mạng trong khoảng thời gian kết nối (contact time) ngắn ngủi giữa chúng. 
+Cách tiếp cận này phù hợp với đặc trưng của mạng chịu trễ, nơi kết nối giữa các nút thường không liên tục và chỉ tồn tại trong các khoảng thời gian ngắn (contact opportunities).
+
+\subsubsection{Message Ferry Network}
+Trong các kịch bản thảm họa như động đất, lũ lụt, hay với các mạng cảm biến thưa thớt, hạ tầng mạng truyền thông có thể bị phá hủy, khiến các nút mạng bị cô lập bởi khoảng cách địa lý.
+Mạng phà thông điệp (Message Ferry Network – MFN) được sinh ra để giải quyết nhu cầu này. 
+Mạng phà thông điệp tận dụng triệt để cơ chế lưu trữ, mang và chuyển tiếp (store-carry-foward) trong mạng chịu trễ để truyền tải thông điệp. Một nút khi nhận được bundle có thể lưu trữ bundle đó trong bộ nhớ của mình, mang chúng theo trong quá trình di chuyển, chờ đợi kến khi gặp một nút thích hợp để đẩy chuyển tiếp bundle đó. Trong Mạng phà thông điệp tồn tại các nút di động, được gọi là phà (ferry), được sử dụng để di chuyển giữa các nút cố định, thu thập và truyền tải thông điệp của chúng. 
+
+\subsection{Các thuật toán tối ưu hóa}
+\subsubsection{Thuật toán di truyền}
+\subsubsection{Thuật toán luyện kim}
+\subsubsection{Các heuristic cho bài toán TSP}
+
+\subsection{Các nghiên cứu liên quan}
+tabaf (2018), pigeon(2018), fpod(2020), ep(2018)
+
+% * Phần 3 ===============================================================
+\section{Giải pháp đề xuất}
+\subsection{Đặt vấn đề và tổng quan đề xuất}
+
+Ta có $n$ nút mạng cố định bị cô lập trên mặt phẳng 2D, tức khoảng cách giữa hai nút bất kỳ luôn lớn hơn bán kình truyền thông $r_comm$, vị trí của các nút này được xác định từ trước. Và $m$ UAV ($m<n$), mỗi UAV có dung lượng bộ đệm hữu hạn và có khả năng di chuyển tự do trên mặt phẳng. Các nút cố định liên tục tạo ra các thông điệp cần truyền đến nút cố định khác. Những thông điệp này có thời hạn (time to live - TTL) và sẽ bị hủy bỏ khi hết hạn. Mục tiêu của bài toán là thiết kế đồng thời chiến lược quy hoạch lộ trình cho UAV, cơ chế định tuyến bundle và giao thức trao đổi gói tin giữa các nút mạng nhằm tối ưu các tiêu chí:
+\begin{itemize}
+\item Delivery Ratio: Tối đa hóa tỷ lệ các thông điệp được truyền thành công đến đích. 
+\item Dead Connection và Low Connection: Tối thiểu hóa số lượng cặp nút $(a,b)$ mà tỷ lệ truyền thành công của các thông điệp được tạo bởi nút $a$ đến đích là nút $b$ bằng không hoặc thấp.
+\item Average Top x\% Delay: Tối thiểu hóa độ trễ trung bình của các gói tin được truyền thành công, tính trên top x\% gói tin được truyền đến đích nhanh nhất.
+\end{itemize}
+
+Bài toán được đặt dưới một số ràng buộc:
+\begin{itemize}
+\item Các nút mặt đất sẽ không được sử dụng làm trung gian chuyển tiếp do hạn chế về năng lượng. Các nút này sẽ chỉ gửi những gói tin nó tạo ra và nhận gói tin đến bản thân nó.
+\item Các UAV phải di chuyển qua tập các vị trí đã được xác định trước trong quá trình quy hoạch lộ trình.
+\end{itemize}
+
+Giải pháp đề xuất của đồ án bao gồm hai phần chính:
+\begin{itemize}
+  \item Đề xuất một giao thức trao đổi bundle giữa hai nút trong mạng.
+  \item Đề xuất thuật toán quy hoạch lộ trình H-mTSP-RE, dựa vào đó để xây dựng bảng định tuyến giữa các nút và đồng bộ lịch trình di chuyển của các UAV trong mạng.
+\end{itemize}
+\subsection{Giao thức trao đổi bundle}
+% \subsubsection{Tổng quan giao thức}
+Các nghiên cứu trước đây về mạng phà thông điệp chủ yếu đều chỉ tập trung vào việc quy hoạch lộ trình và định tuyến (tức xác định các thông điệp nào được chuyển cho nhau khi gặp gỡ). Các nghiên cứu này sử dụng các bộ mô phỏng như the-ONE, Matlab hoặc các bộ mô phỏng tự cài đặt mà không đề cập đến giao thức trao đổi thông điệp. Trong bộ mô phỏng the-ONE, khi hai nút gần nhau, thì chúng sẽ được kết nối và các thông điệp cần chuyển tiếp cho nhau sẽ nhau lập tức bay sang bộ đệm của đối phương.
+
+Đối với yêu cầu mô phỏng trong bộ mô phỏng NS3 và hướng tói triển khai trong thực tế, đồ án đề xuất một giao thức để hai nút trong mạng phà thông điệp có thể trao đổi với nhau, lấy ý tưởng dựa trên một nghiên cứu về việc cài đặt thuật toán định tuyến epidemic trong mạng chịu trễ \cite{ns3-epidemic-2018}
+
+\subsubsection{Các gói tin trong giao thức}
+
+Giao thức được cài đặt tại tầng ứng dụng, sử dụng UDP ở tầng giao vận để trao đổi và mỗi nút sử dụng một địa chỉ Ip 32 bit để định danh. Các gói tin cần gửi trong giao thức bao gồm:
+\begin{itemize}
+  \item BEACON: Gói tin này liên tục được broadcast vởi các UAV, nhằm tìm kiếm các nút lân cận và bắt đầu giao thức
+  \item GROUND-HELLO : Gói tin "chào hãng xóm" của các nút mặt đất, gói tin này sẽ chứa các thông tin về bản thân của nút, cùng các thông tin quan trọng cho việc định tuyến thông điệp.
+  \item FERRY-HELLO : Tương tự, đây là gói tin chào hàng xóm của các UAV.
+  \item BUNDLE: Gói tin chứa thông điệp cần chuyển tiếp. Ở đây, các gói tin này chỉ mang tính tượng trưng, với độ lớn 1KB, vì đề tài chưa xét đến dữ liệu thực.
+  \item BUNDLE-ACK : Acknowledgement cho gói BUNDLE, dùng để xác nhận thông điệp đã được truyền thành công, nút nhận được sẽ xóa thông điệp khỏi bộ đệm.
+  \item ACCEPT-TRANSFER : Gói tin này được gửi bởi UAV, để báo hiệu rằng UAV vẫn còn chỗ để chứa thêm thông điệp.
+  \item BUNDLE-ACK-AAT : (Bundle Ack and Accept transfer) Gói này là kết hợp của hai gói tin trước, chỉ nhằm tránh việc phải gửi 2 gói tin liên tiếp.
+\end{itemize}
+
+Các gói tin trên, trừ gói BUNDLE, đều là các gói tin điều khiển. Trong phạm vi đồ án, toàn bộ thông tin mà các gói tin mang theo (trừ dữ liệu của gói BUNDLE) đều sẽ được gọi tạm là header. Các header cơ bản bao gồm:
+\begin{itemize}
+  \item {\bfseries Message Type Header} bao gồm trường SourceIP (32 bit) và MessageType (8 bit). Header này là bắt buộc và nằm trên cùng tất cả các header và dữ liệu khác. Gói BEACON và ACEEPT-TRANSFER chỉ có header này.
+  \item {\bfseries Bundle Header} là header của gói BUNDLE, bao gồm SourceIP(32), DestinationIP(32), BundleID(32), CreationTime(64) và hop(8) lần lượt là nút nguồn, nút đích, định danh của thông điệp (được gán tại nút nguồn), thời gian thông điệp được tạo ra (tính theo micro giây), và số bước nhảy hiện tại của thông điệp.
+  \item {\bfseries Bundle Ack Header}, tương tự, là header của gói BUNDLE-ACK và BUNDLE-ACK-AAT, bao gồm SourceIP(32), DestinationIP(32) và BundleID(32)
+\end{itemize}
+
+Với các gói tin HELLO, tùy vào yêu cầu của thuật toán định tuyến, ta có thể cài đặt gói tin mang các header tùy chọn để chia sẻ thông tin quan trọng hỗ trợ cho việc định tuyến. Một số ví dụ như:
+
+\begin{itemize}
+  \item {\bfseries Visit Time Header} bao gồm count(32) và một danh sách nodeIP(32) và visitTime(64). Thể hiện một nút mặt đất với nodeIP đã được ghé thăm bởi một UAV nào đó tại thời điểm visitTime.
+  \item {\bfseries Ferry Route Header} gồm count(32) và một danh sách nodeIP(32) và expectedVisitTime(64). Thể hiện UAV gửi header này sẽ đến các nút mặt đất nào và dự kiến đến khi nào. UAV nhận được thể sử dụng thông tin này để lựa chọn các gói tin nào có thể đến đích sớm hơn để chuyển tiếp.
+  \item {\bfseries Buffer State Header} gồm count(32), isFull(8) và một danh sách NodeIP(32) và BundleCount(64). Thể hiện trạng thái bộ đệm của UAV gửi header này: Có bao nhiêu thông điệp cần gửi đến mỗi nút mặt đất, bộ đệm của UAV này đã đầy hay chưa. Header này được sử dụng bởi tất cả các cài đặt vì chúng đều dùng thông tin isFull để quyết định bắt đầu giao thức trao đổi.
+\end{itemize}
+
+Gói tin GROUND-HELLO trong đề xuât của đồ án không dùng bất cứ header bổ sung nào ngoài Message Type Header. Còn gói FERRY-HELLO chỉ sử dụng thêm Bundle Count Header, tuy nhiên trường count được đặt là 0 và không có danh sách đếm số lượng thông điệp cần gửi đến nút, vì thuật toán định tuyến của H-mTSP-RE không cần đến các thông tin này. 
+
+\subsubsection{Giao thức trao đổi giữa nút mặt đất và UAV}
+
+Do nút mặt đất chỉ nhận các thông điệp có đích là chính nó, nên trong quá trình trao đổi này, ta không cần lo lắng về bộ đệm của nút mặt đất. Do vậy, quá trình trao đổi giữa nút mặt đất và UAV được thực hiện trong 2 pha: đầu tiên, UAV sẽ gửi tất cả các thông điệp tin có đích là nút mặt đất xuống, giải phóng bộ đệm cho UAV, sau đó, nút mặt đất sẽ gửi các thông điệp mà nó muốn gửi lên UAV (việc xác định thông điệp nào để gửi là nhiệm vụ của các thuật toán định tuyến). Quy trình hoàn thiện của giao thức được thể hiện trong hình \ref{fig:ferry_to_ground}
+
+\begin{itemize}
+  \item Các uav sẽ liên tục broadcast gói tin BEACON để tìm kiếm các nút lân cận. Nếu nút mặt đất nhận được gói tin này, đầu tiên, nó kiểm tra xem hiện tại có đang trong phiên trao đổi với UAV không bằng cách so sánh thời gian gàn nhất mà hai nút trao đổi đến hiện tại với một ngưỡng, nếu hai nút đang không trao đổi, nó sẽ gửi lời chào bằng gói GROUND-HELLO để bắt đầu giao thức.
+  \item Một UAV khi nhận được GROUND-HELLO, sẽ tìm kiếm trong bộ đệm của mình các thông điệp cần gửi đến nút mặt đất và lần lượt gửi các thông điệp này qua các gói BUNDLE. Nút mặt đất nhận được BUNDLE sẽ trả luôn lời bằng BUNDLE-ACK-AAT để xác nhận, đồng thời cho phép UAV gửi tiếp. UAV nhận được BUNDLE-ACK-AAT thì mới gửi BUNDLE tiếp theo.
+  \item Khi UAV không còn gói tin nào có thể gửi đến nút mặt đất, nó sẽ gửi lời chào FERRY-HELLO để chuyển sang pha trao đổi thứ hai.
+  \item Nút mặt đất khi nhận được FERRY-HELLO, tương tự, sẽ tìm kiếm trong bộ đệm của mình các thông điệp cần gửi đến UAV, và lần lượt gửi nó bằng gói BUNDLE. UAV sau khi xác nhận thông điệp sẽ gửi trả về BUNDLE-ACK hoặc BUNDLE-ACK-ATT ứng với việc bộ đệm của UAV đã đầy hay chưa.
+  \item Giao thức kết thúc ngay lập tức nếu xảy ra một trong các điều kiện sau: 
+  \begin{itemize}
+    \item Nút mặt đất không còn thông điệp để gửi
+    \item Nút mặt đất bị từ chối truyền do bộ đệm của UAV đã đầy
+    \item Bất kỳ gói tin nào trong quá trình trao đổi bị mất.
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{image/ferry_to_ground.png}
+  \caption{Quy trình thức trao đổi giữa nút mặt đất và UAV}
+  \label{fig:ferry_to_ground}
+\end{figure}
+
+\subsubsection{Giao thức trao đổi giữa 2 UAV}
+
+Khác với trao đổi giữa UAV và nút mặt đất, khi hai UAV trao đổi với nhau, chúng cần phải xét đến bộ đệm của từng UAV, một UAV không thể liên tiếp gửi các thông điệp vì bên nhận có thể bị tràn bộ đệm. Bên cạnh đó, trong thực tế do mỗi thông điệp (bundle) có kích thước lớn và thời gian truyền đáng kể, giao thức cần hạn chế xung đột bằng việc đảm bảo tại mỗi thời điểm chỉ có tối đa một thông điệp được truyền.
+
+Để đảm bảo 2 uav có khả năng truyền thông điệp mà không cần lo lắng việc tràn bộ đệm, giao thức áp dụng cơ chế gửi luân phiên: hai uav thể luân phiên gửi thông điệp cho nhau, mỗi khi nhận được thông điệp, UAV gửi trả về ack để xác nhận và khiến cho UAV đối tác giải phóng bộ đệm, khi này UAV hiện tại có thể gửi một thông điệp mới. Với cách này, kể cả khi cả hai UAV chỉ có một vị trí trống trong bộ đệm thì chúng vẫn có thể trao đổi vô số thông điệp với nhau. Tại một thời điểm trong quá trình trao đổi, có nhiều nhất một nút giữ quyền gửi (tạm gọi là Token Owner), nút này sẽ gửi thông điệp đồng thời giao quyền gửi (Token) cho đối tác.
+Giao thức trao đổi được chia làm 2 pha: Thiết lập nút giữ quyền gửi trước và trao đổi. Cụ thể:
+
+\paragraph{Bắt tay: Thiết lập nút có quyền gửi trước}
+\begin{itemize}
+  \item Tương tự như khi trao đổi với nút mặt đất, các UAV liên tục broadcast các gói BEACON để tìm nút lân cận. Một UAV khi nhận BEACON, sẽ kiểm tra địa chỉ Ip của nút gửi và kiểm tra xem hiện hai UAV có đang trao đổi với nhau hay không.
+  \item Nếu hai UAV đang không trao đổi, UAV có Ip thấp hơn sẽ phản hồi bằng gói FERRY-HELLO. UAV còn lại khi nhận FERRY-HELLO cũng sẽ phản hồi bằng FERRY-HELLO. Tại thời điểm này, một phiên trao đổi mới được thiết lập giữa hai UAV.
+  \item Sau khi nhận FERRY-HELLO, UAV có Ip thấp hơn tạm thời giữ quyền gửi, UAV này sẽ kiểm tra bộ đệm của UAV đối tác (thông tin này được đính kèm trong gói FERRY-HELLO)
+  \begin{itemize}
+    \item Nếu bộ đệm của cả hai UAV đã đầy, giao thức sẽ kết thúc ngay lập tức.
+    \item Nếu bộ đệm của UAV đối tác đầy và token owner có thể chứa thêm các thông điệp mới, nó sẽ gửi gói ACCEPT-TRANSFER để trao quyền gửi cho đối tác.
+    \item Trường hợp còn lại, nó sẽ giữ quyền gửi.
+  \end{itemize}
+  \item Sau pha bắt tay này, hai UAV chuyển qua pha trao đổi
+\end{itemize}
+
+\paragraph{Trao đổi thông điệp và quyền gửi}
+\begin{itemize}
+  \item Nút giữ quyền gửi (Token owner) lựa chọn trong bộ đệm của mình một thông điệp cần gửi cho đối tác rồi gửi qua gói BUNDLE. Gói BUNDLE ngoài dữ liệu, nó còn mang ý nghĩa trao quyền gửi (Token) của mình cho đối tác.
+  \item UAV nhận được BUNDLE sẽ kiểm tra:
+  \begin{itemize}
+    \item Nếu có thông điệp cần gửi, nó trở thành Token owner mới, trả về BUNDLE-ACK để UAV đối tác giải phóng bộ đệm, sau một khoảng thời gian ngắn, nó sẽ lặp lại bước 1 để gửi thông điệp mới.
+    \item Nếu không có thông điệp cần gửi, nó sẽ trả về BUNDLE-ACK hoặc BUNDLE-ACK-ATT dựa trên việc bộ đệm của nó đã đầy hay chưa. Gói BUNDLE-ACK-ATT ngoài việc xác nhận gói tin đã được nhận thành công, cũng mang ý nghĩa trao trả lại token để đối tác có thể gửi các thông điệp mới.
+  \end{itemize}
+  \item Giao thức sẽ kết thúc khi Token owner mói không được thiết lập, hoặc Token owner không có thông điệp nào để gửi hoặc bất kỳ gói tin nào trong quá trình trao đổi bị mất.
+\end{itemize}
+
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=0.5\textwidth]{image/ferry_to_ferry_1.png}
+%   \caption{Quy trình bắt tay trong giao thức trao đổi giữa 2 UAV}
+%   \label{fig:ferry_to_ferry_1}
+% \end{figure}
+
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=0.5\textwidth]{image/ferry_to_ferry_2.png}
+%   \caption{Quy trình trao đổi trong giao thức trao đổi giữa 2 UAV}
+%   \label{fig:ferry_to_ferry_2}
+% \end{figure}
+
+\begin{figure}%
+    \centering
+    \subfloat[\centering Bắt tay]{{\includegraphics[width=0.46\textwidth]{image/ferry_to_ferry_1.png} }}%
+    \qquad
+    \subfloat[\centering Trao đổi]{{\includegraphics[width=0.46\textwidth]{image/ferry_to_ferry_2.png} }}%
+    \caption{Quy trình bắt tay (a) và trao đổi (b) trong giao thức trao đổi giữa 2 UAV}%
+    \label{fig:ferry_to_ferry}%
+\end{figure}
+\subsection{Thuật toán quy hoạch lộ trình 2 pha H-mTSP-RE (Hub m-Traveling Saleman Problem and Route Extend)}
+\subsubsection{Ý tưởng của thuật toán}
+Các phương pháp quy hoạch lộ trình trước đó, Tabaf, DTP-TSP-D hay FPOD đều hoạt động theo cơ hội, các UAV ra quyết định nút nào để đi chuyển đến tiếp theo dựa trên quan sát đơn lẻ của chúng trong môi trường hiện tại. Tuy nhiên, chúng lại thể hiện sự không công bằng, khi một cặp nút ở xa nhau, các gói tin giữa chúng có thể bị bỏ qua vì các uav có thể chuyển nhiều thông điệp đến các nút ở gần uav hơn. Điều này khiến các thuật toán này khó tối thiểu hóa chỉ số dead connection và low connection.
+
+Để đạt được sự công bằng và giảm chỉ số dead connection và low connection về không, các uav phải coi việc phục vụ các nút ở xa nhau và gần nhau là như nhau. Việc này dẫn đến ý tưởng về một điểm trung chuyển, thay vì những người đưa thư cố di chuyển để gửi gói tin đến các vị trí ở gần mình, họ chuyển thư về một kho tổng, và nhiệm vụ chuyển thư đến đích sẽ do người đưa thư khác phù hợp hơn thực hiện. Ý tưởng này thể hiện sự công bằng giữa tất cả các nút trong mạng:
+\begin{itemize}
+  \item Khi hai nút ở xa nhau cần chuyền thông điệp, quãng đường mà thông điệp phải đi sẽ gần như là đường thẳng, giúp thông điệp đến đích kịp thời hạn.
+  \item Khi hai nút ở gần nhau, thông điệp giữa chúng vẫn có thể phải đi qua điểm trung chuyển. Quãng đường mà thông điệp đi dài hơn, nhưng cũng không quá dài để thông điệp đến đích kịp thời.
+\end{itemize}
+
+Từ đây, ý tưởng trở thành việc các uav chia nhau đi để thu thập thông điệp, trao đổi với nhau tại một điểm trung chuyển (hub) rồi lại chia nhau đi để truyền thông điệp đến đích và thu thập thông điệp mới. H-mTSP-RE sử dụng các thuật toán tối ưu hóa và các heuristic để thực hiện việc này qua hai pha chính: 
+\begin{itemize}
+  \item Pha 1: Hub mTSP: Các nút mặt đất được phân thành m nhóm ứng với từng UAV. Đồng thời ở bước này, một điểm trung chuyển tối ưu được tìm để các UAV sau khi thu thập thông điệp sẽ trao đổi với nhau, với kỳ vọng rằng quãng đường mà một thông điệp phải đi dài nhất là ngắn nhất và các UAV chia sẻ việc phục vụ các nút mặt đất với nhau một cách công bằng.
+  \item Pha 2: Route Extend: Ở pha này, các uav tận dụng thời gian còn lại sau khi hoàn thành nhiệm vụ của bản thân để đi đến các điểm khác, hỗ trợ việc thu thập thông điệp.
+  \item Cuối cùng từ hai pha trên, một bảng định tuyến được xây dựng và các uav thực hiện việc đồng bộ lịch trình di chuyển theo chiến lược trung chuyển ảo: Các uav sẽ đợi nhau ở điểm trung chuyển, trao đổi với nhau, sau đó đi một vòng lộ trình và quay trở lại điểm trung chuyển và lặp lại.
+\end{itemize}
+
+\subsubsection{Pha 1: Hub mTSP} 
+Pha 1 của H-mTSP-RE, tạm gọi là bài toán H-mTSP, gần tương tự như việc giải bài toán mTSP, m người đưa thư phải chia nhau đi qua các vị trí để lấy và gửi thư, và thay vì có một điểm xuất phát (depot cho trước) như mTSP, ở bài toán H-mTSP, ta cần tự tìm một depot, một điểm trung chuyển tối ưu mà tất cả các người đưa thư đều phải ghé thăm. Lời giải cho bài toán H-mTSP cũng tương tự như bài toán mTSP, là một danh sách các lộ trình, ứng với việc từng uav sẽ phải ghé thăm các nút mặt đất nào, theo thứ tự ra sao. Bài toán H-mTSP có thể được phát biểu như sau: 
+
+Cho một tập $n$ điểm \( P = \{p_1, p_2, \dots, p_n\} \subset \mathbb{R}^2 \), trong đó mỗi điểm biểu diễn một vị trí cần được phục vụ. Khoảng cách giữa hai điểm \( p_i, p_j \in P \) là $d(p_i, p_j)$, là khoảng cách Euclid giữa hai điểm trên mặt phẳng 2D.
+
+Cho biết số lượng UAV là \( m \). Không giống như bài toán mTSP cổ điển, bài toán này yêu cầu đồng thời xác định một điểm trung chuyển (hub) \( h \in \mathbb{R}^2 \), không nhất thiết trùng với bất kỳ điểm nào trong \( P \).
+
+Mỗi người UAV \( k \in \{1, \dots, m\} \) thực hiện một lộ trình khép kín bắt đầu từ trung chuyển \( h \), đi qua một tập con các điểm trong \( P \), và quay trở lại \( h \). Các hành trình này phải thỏa mãn các điều kiện sau:
+
+\begin{itemize}
+    \item Mỗi điểm \( p_i \in P \) được thăm đúng một lần bởi đúng một UAV.
+    \item Mỗi hành trình bắt đầu và kết thúc tại hub \( h \).
+    \item Các tập điểm được phân công cho các UAV là đôi một rời nhau và hợp của tât cả bằng \( P \).
+\end{itemize}
+
+Gọi \( R_k = (h, p_{k,1}, p_{k,2}, \dots, p_{k,\ell_k}, h) \) là lộ trình của UAV thứ \( k \). Khi đó, chi phí hay độ dài của lộ trình này được xác định bởi:
+\begin{equation}
+l_k(h) = d(h, p_{k,1}) + \sum_{i=1}^{\ell_k - 1} d(p_{k,i}, p_{k,i+1}) + d(p_{k,\ell_k}, h) + (\ell_k + 1) \times V_{uav} \times t_{hover}
+\label{eq:route_length}
+\end{equation}
+
+Trong đó:
+\begin{itemize}
+  \item $V_{uav}$ là vận tốc của uav.
+  \item $t_{hover}$ là thời gian uav bay lơ lửng mỗi khi đến phục vụ tại một vị trí.
+  \item $\ell_k$ là số nút mặt đất được UAV k phục vụ.
+\end{itemize}
+
+Mục tiêu của bài toán là đồng thời xác định vị trí hub \( h \) và tập \( m \) hành trình sao cho:
+\begin{itemize}
+  \item Lộ trình dài nhất là ngắn nhất.
+  \item Các lộ trình có độ dài tương tự nhau, hay các uav phải chia sẻ trách nhiệm phục vụ cho nhau một cách công bằng.
+\end{itemize}
+
+Bài toán mTSP và các biến thể của nó đã được xuất hiện trên nhiều nghiên cứu, sử dụng nhiều phương pháp khác nhau để giải quyết. Một trong trong thuật toán tối ưu hóa phổ biến nhất được dùng để giải bài toán mTSP là thuật toán di truyền, và ta có thể khéo léo áp dụng thuật toán di truyền và tìm kiếm cục bộ để tìm một lời giải cận tối ưu cho bài toán H-mTSP.
+
+\paragraph{Hàm chi phí: Mục tiêu tối ưu}
+
+Dù sử dụng bất cứ thuật toán tối ưu hóa nào, trước hết ta đều cần phải xác định mục tiêu tối ưu, cụ thể hóa nó bằng một hàm chi phí để đánh giá độ tốt của một lời giải. Với mỗi lời giải của bài toán, ta đều có thể tính toán được độ dài các lộ trình bằng (\ref{eq:route_length}), và từ thông tin về độ dài lộ trình, chúng ta có thể tính được một hàm chi phí như sau:
+\begin{equation}
+Cost = max(l_i | 1\le i \le m) + \alpha \times \frac 1m\sum_{i=1}^{m} l_i + \beta \times CEP + ERP
+\end{equation}
+
+Hàm chi phí là tổng của 4 thành phần:
+\begin{itemize}
+  \item Độ dài của lộ trình dài nhất 
+  \item Độ dài trung bình các lộ trình
+  \item Cap Exceed Penalty (CEP) - Phạt vượt ngưỡng
+  \item Empty Route Penalty (ERP) - Phạt các lộ trình rỗng
+\end{itemize}
+
+Thành phần thứ nhất của hàm chi phí là tiêu chí Makespan, phản ánh mục tiêu quan trọng nhất của bài toán H-mTSP, đó là tối ưu để lộ trình dài nhất là ngắn nhất, nhằm tối thiểu hóa thời gian của một vòng phục vụ của các uav.
+Tuy nhiên nếu chỉ tối ưu theo tiêu chí này, thuật toán thuật toán có thể tạo ra các lộ trình không hiệu quả cho các UAV còn lại, tạo ra các lộ trình vòng vèo, không tối ưu nhưng vẫn đảm bảo ngắn hơn lộ trình dài nhất. Thuật toán phải xét thêm các tiêu chí phụ. 
+
+Tiêu chí phụ thứ nhất là độ dài trung bình các lộ trình. Tiêu chí này giúp thuật toán chọn các giải pháp có tổng quãng đường di chuyển ngắn hơn, khiến các lộ trình sạch sẽ, gọn gàng hơn. Không những thế, tiêu chí này cũng góp phần tối ưu độ dài lộ trình dài nhất, trong khi lai tạo và đột biết, nhóm các nút tạo nên lộ trình dài nhất có thể thay đổi và nhóm mới này có thể đã được tối ưu từ trước nhờ tiêu chí độ dài trung bình.
+
+Tiêu chí phụ thứ hai là Cap Exceed Penalty (CEP) hay phạt vượt ngưỡng. Tuy CEP chỉ là tiêu chí phụ nhưng nó là một thành phần quan trọng giúp phân chia công việc cho các uav một cách công bằng. Công thức cơ bản của CEP như sau:
+\begin{equation}
+CEP = \frac 1 {cec} \sum_{i=1}^{m} \max(0, l_i - cap)
+\end{equation}
+Trong đó:
+\begin{itemize}
+  \item cap là ngưỡng cho trước
+  \item cec hay Cap Exceed Count là số lộ trình có độ dài vượt ngưỡng. Trong trường hợp $cec = 0$ thì $CEP = 0$.
+\end{itemize}
+
+Mục đích của CEP là ép các uav phải san sẻ nhiệm vụ của mình một cách công bằng hơn. Cụ thể, nó ép các uav có lộ trình ngắn hơn ngưỡng cap phải phục vụ thêm để giảm tải cho các uav có lộ trình dài.
+Việc chọn một ngưỡng cap hợp lý rất quan trọng, nó quyết định sự thành công của chiến lược này. Nếu ngưỡng càng thấp, khi này, phần lớn các lộ trình của uav đều lớn hơn ngưỡng này, giá trị tổng CEP tiến về tổng độ dài lộ trình. Còn nếu ngưỡng quá cao, khi này, các lộ trình phần lớn đều ngắn hơn, khiên CEP tiến về 0. Cả hai trường hợp đều khiến CEP mất đi giá trị của nó.
+Để xác định một giá trị ngưỡng hợp lý, hãy xét các trường hợp xấu nhất của chiến lược H-mTSP.
+
+Kịch bản 1, xét hai nút mặt đất và hai uav phục vụ chúng. Theo chiến lược trung chuyển ảo, sẽ di chuyển giữa nút của mình và điểm trung chuyển Dễ thấy rằng điểm trung chuyển sẽ nằm ở chính giữa hai nút mặt đất, và hai uav sẽ có lộ trình dài bằng nhau, tạm gọi là $L$. Trong trường hợp xấu nhất, ngay sau khi uav vừa rời khỏi nút mặt đất để đi đến điểm chung chuyển, thì nút mặt đất đó tạo ra thông điệp mới, thông điệp này sẽ phải chờ uav quay lại ($L$), sau đó sẽ phải chờ trong bộ đệm của uav đến điểm chung chuyển ($\frac L2$), và chờ tiếp khi đi từ trung chuyển đến đích ($\frac L2$). Tổng thời gian mà gói tin phải chờ tương đương với thời gian mà uav đi một quãng đường có độ dài $2L$. Vậy nếu ta muốn đảm bảo tỉ lệ truyền thông điệp thành công là 100\%, thì với giới hạn Time-to-Live của thông điệp, độ dài lộ trình dài nhất của các uav phải nhỏ hơn: 
+\begin{equation}
+expectedMaxLength = \frac 1 2 \times TTL \times V_{uav}
+\end{equation}
+
+Trong đó $V_{uav}$ là vận tốc của uav.
+
+Kịch bản 2, vẫn là hai uav nhưng chúng phải phục vụ nhiều nút hơn, tuy nhiên, ta chỉ cần quan tâm đến nút biên: nút A nằm ở đầu lộ trình của uav 1 và nút B nằm ở cuối lộ trình uav 2.
+Trường hợp xấu nhất của kịch bản này, là ngay sau khi uav vừa rời khỏi nút A để đi đến điểm chung chuyển, thì nút A tạo ra thông điệp mới gửi đến B, thông điệp này sẽ phải chờ uav quay lại ($L$), sau đó sẽ phải chờ trong bộ đệm của uav đến điểm chung chuyển ($L - d(hub,A)$), và chờ tiếp khi đi từ trung chuyển đến đích ($L-d(hub,B)$). Tổng thời gian mà gói tin phải chờ tương đương với thời gian mà uav đi một quãng đường có độ dài tương đương $3L$. Tương tự, nếu ta muốn đảm bảo tỉ lệ truyền thông điệp thành công là 100\%, độ dài lộ trình dài nhất của các uav phải nhỏ hơn: 
+\begin{equation}
+expectedMaxLength \approx \frac 1 3 \times TTL \times V_{uav}
+\end{equation}
+
+Từ phân tích trên, ta có thể chọn một 2 ngưỡng mục tiêu hợp lý để thuật toán tìm được các lộ trình với độ dài phù hợp, đồng thời tránh sự phụ thuộc vào một ngưỡng cố định:
+\begin{equation}
+cap1 = \frac 1 3 \times TTL \times V_{uav}
+\end{equation}
+\begin{equation}
+cap2 = \frac 1 2 \times TTL \times V_{uav}
+\end{equation}
+
+Khi này công thức CEP trở thành
+\begin{equation}
+CEP = \frac 1 {cec_1} \sum_{i=1}^{m} \max(0, l_i - cap1) + \frac 1 {cec_2} \sum_{i=1}^{m} \max(0, l_i - cap2)
+\end{equation}
+
+Trong trường hợp TTL đủ lớn, khiến giá trị $CEP \approx 0$. Khi này yêu cầu cân bằng chặt chẽ cũng không cần thiết nữa, do $\max l_i$ đã nhỏ hơn $expectedMaxLength$, các UAV luôn có thể phục vụ trong các trường hợp xấu nhất như đã phân tích.
+
+Tiêu chí phụ cuối cùng là Empty Route Penalty (ERP). Đây chỉ là tiêu chí đơn giản giúp phạt các lời giải tạo ra các lộ trình rỗng. Tiêu chí này chỉ là phòng ngừa và việc tránh tạo ra lộ trình rỗng có thể được giải quyết ở các bước lai tạo và đột biến để tạo ra lời giải mới.
+
+\begin{equation}
+ERP = ERC \times penalty
+\end{equation}
+Trong đó:
+\begin{itemize}
+  \item ERC: Empty Route Count - Số lộ trình rỗng
+  \item penalty: mức phạt
+\end{itemize}
+
+Cuối cùng, sau khi thử nghiệm các trọng số, hai hàm chi phí sau được lựa chọn để sử dụng:
+\begin{itemize}
+  \item Hàm chi phí 1 cân bằng giữa việc tìm kiếm vùng nghiệm tốt và tối ưu theo mục tiêu makespan, hàm này được sử dụng trong quá trình tối ưu bằng thuật toán di truyền.
+  \begin{equation}
+    Cost_1 = max(l_i | 1\le i \le m) + 0.01 \times \frac 1m\sum_{i=1}^{m} l_i + 0.05 \times CEP + ERP
+  \end{equation}
+  \item Hàm chi phí 2 tập trung vào mục tiêu chính makespan, các tiêu chí phụ thì chỉ cải thiện nếu có thể, do vậy hàm này được sử dụng trong quá trình tinh chỉnh bằng tìm kiếm cục bộ:
+  \begin{equation}
+    Cost_2 = max(l_i | 1\le i \le m) + 0.001 \times \frac 1m\sum_{i=1}^{m} l_i + 0.005 \times CEP + ERP
+  \end{equation}
+\end{itemize}
+
+{\bfseries Tìm điểm trung chuyển:}
+
+Điểm trung chuyển tối ưu là một điểm sao cho lộ trình của một UAV (xuất phát từ trung chuyển, đi qua các nút nó cần phục vụ rồi qua lại) dài nhất là ngắn nhất. Từ một lời giải của bài toán, ta có thể tìm vị trí của điểm trung chuyển bằng một phương pháp tương tự như gradient descent trong học máy. Đầu tiên, ta khởi tạo vị trí điểm trung chuyển ban đầu là trung tâm của các vị trí nút mặt đất, sau đó lặp lại thuật toán \ref{alg:hub} để tinh chỉnh: Ta chèn vị trí chung chuyển vào các lộ trình của từng uav, sau đó tìm lộ trình dài nhất và kéo vị trí điểm trung chuyển về gần các nút trong lộ trình đó. Sau khi lặp lại việc tinh chỉnh với learning rate giảm dần, chúng ta sẽ có được một điểm hub tối ưu sau cho lộ trình dài nhất là ngắn nhất. Đồng thời đảm bảo rằng 2 hoặc 3 lộ trình dài nhất dài tương đương nhau. Điểm trung chuyển cuối cùng này sẽ được chèn vào các lộ trình để tính hàm chi phí theo công thức đã đề cập ở mục trước.
+
+\begin{algorithm}
+\caption{Tinh chỉnh vị trí hub}
+\label{alg:hub}
+\begin{algorithmic}[1]
+
+\Require Vị trí ban đầu $h$, danh sách lộ trình (không chứa hub) $\{R_1,\dots,R_m\}$, số vòng lặp $T$, learning rate $\alpha$
+\Ensure Vị trí sau tinh chỉnh $h$
+
+\While{$T > 0$}
+    \State $T \gets T - 1$
+
+    \For{mỗi uav $i$}
+        \State $R'_i \gets$ Chèn hub $h$ vào lộ trình $R_i$
+        \State Tính độ dài $l'_i$
+    \EndFor
+
+    \State $k \gets \arg\max_i l;_i$
+
+    \State $p \gets$ chọn ngẫu nhiên điểm đầu hoặc điểm cuối của $R_k$
+
+    \State $h \gets (1-\alpha) \times h + \alpha \times p$
+\EndWhile
+
+\State \Return $h$
+
+\end{algorithmic}
+\end{algorithm}
+
+{\bfseries Chromosome: Biểu diễn lời giải}
+
+Sau khi có được cách tính điểm trung chuyển và hàm chi phí, ta có thể đi sâu vào các kỹ thuật liên quan tới thuật toán di truyền, đầu tiên là thiết kế nhiễm sắc thể (chromosome). Lời giải của bài toán có thể được biểu diễn dưới dạng một nhiễm sắc thể gồm hai phần (Hình \ref{fig:twopart_chromosome}):
+\begin{itemize}
+  \item Permuation: Một dãy số với độ dài $n$, là hoán vị thứ tự các nút mặt đất mà uav cần ghé thăm.
+  \item RouteLen: Một dãy số nguyên dương có độ dài $m$, thể hiện số lượng nút mặt đất mà từng uav sẽ phục vụ.
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics{image/twopart_chromosome.jpg}
+  \caption{Biểu diễn nhiễm sắc thể}
+  \label{fig:twopart_chromosome}
+\end{figure}
+
+Việc lai ghép và đột biến để tạo nhiễm sắc thể mới được thực hiện như sau:
+
+\begin{itemize}
+  \item Lai ghép: 
+  \begin{itemize}
+    \item Phần một của nhiễm sắc thể được lai ghép theo Ordered Crossover, một đoạn trong gene mẹ được chọn và giữ lại, đoạn sau được điền vào theo thứ tự xuất hiện trong gene cha.
+    \item Phần hai của nghiễm sắc thể được lai ghép theo Single-Point Crossover, một điểm cắt được chọn, và phần trước điểm cắt sẽ được sao chép từ gene mẹ, phần sau điểm cắt sẽ được sao chép từ gene cha (hoặc ngược lại theo tỉ lệ 50-50). Sau đó, ta thực hiện thêm hoặc bớt một cách ngẫu nhiên để tổng của phần RouteLen bằng $n$.
+  \end{itemize}
+  \item Đột biến:
+  \begin{itemize}
+    \item Swap: Đổi trỗ hai vị trí ngẫu nhiên trong Permutation.
+    \item Move: Di chuyển một điểm ngẫu nhiên trong một lộ trình ngẫu nhiên, sang một vị trí ngẫu nhiên của một lộ trình ngẫu nhiên khác.
+    \item Reverse: Đảo ngược một đoạn ngẫu nhiên trong một lộ trình ngẫu nhiên.
+  \end{itemize}
+\end{itemize}
+
+{\bfseries Các kỹ thuật di truyền được sử dụng}
+
+Sau nhiều lần thử nghiệm và so sánh kết quả của các phiên bản thuật toán di truyền với bài toán H-mTSP, nhận thấy rằng thuật toán di truyền ban đầu có xu hướng hội tụ sớm và ít cải thiện ở các thế hệ sau, một số kỹ thuật đã được sử dụng để khắc phục vấn đề này:
+
+\begin{itemize}
+  \item \textbf{Elite-Rank based Roulette selection}: Ở mỗi lần lựa chọn lai tạo, hai cá thể được chọn ngẫu nhiên theo cơ chế xếp hạng (Rank-based Roulette), một cá thể sẽ được chọn trong nhóm tinh hoa (elite - 50\% cá thể tốt nhất), cá thể còn lại được chọn trên toàn bộ quần thể.
+  \item \textbf{Giới hạn tuổi thọ}: Khi một cá thể tồn tại quá lâu, nó sẽ bị loại bỏ và thay thế bằng cá thể ngẫu nhiên mới. Tránh việc các nghiệm tối ưu cục bộ chi phối việc khám phá của thuật toán trong thời gian dài.
+  \item \textbf{Reset Injection}: Tại một số mốc thế hệ định trước, 75\% cá thể tệ nhất sẽ bị loại bỏ và thay thế bằng các cá thể ngẫu nhiên. Giúp tái khởi động quá trình tìm kiếm của thuật toán.
+
+\end{itemize}
+
+{\bfseries Tìm kiếm cục bộ (local search): cải thiện kết quả tìm được}
+
+Sau khi tìm được một lời giải tốt cho bài toán H-mTSP qua thuật toán di truyền, ta có thể chạy thêm một thuật toán tìm kiếm cục bộ tham lam để có thể cải thiện kết quả tìm được. Bước này sử dụng hàm chi phí $Cost_2$ đã đề cập ở phần trước.
+
+Thuật toán \ref{alg:local_search_hmtsp} lặp lại việc thử các lân cận của lời giải tốt nhất tìm được: thử chuyển một nút từ uav này sang uav khác, hoặc hoán đổi hai nút giữa hai uav, và dừng lại khi không thấy cải thiện. Một lưu ý khi tính chi phí cho lời giải là khi thực hiện việc di chuyển nút giữa các uav thì thứ tự lộ trình ban đầu đã bị xáo trộn, vì vậy khi tính chi phí, ta phải áp dụng các heurisic cho bài toán TSP như 2-opt, 3-opt để có được các lộ trình và vị trí chèn điểm trung chuyển vào lộ trình tối ưu. Thuật toán tinh chỉnh điểm trung chuyển cũng có thay đổi nhỏ, thay vì kéo về điểm đầu hoặc cuối lộ trình như thuật toán \ref{alg:hub}, điểm trung chuyển sẽ được kéo về một điểm ngẫu nhiên trên lộ trình dài nhất.
+
+\begin{algorithm}
+\caption{Local Search H-mTSP}
+\label{alg:local_search_hmtsp}
+\begin{algorithmic}[1]
+
+\Require lời giải ban đầu $C = \{R_1, \dots, R_m\}$, số uav $m$
+\Ensure Lời giải tối ưu cục bộ $C^*$
+
+\State $C^* \gets C$
+\State $bestCost \gets \text{Cost}(C^*)$
+
+\State $improved \gets True$
+\While{$improved$}
+    \State $improved \gets False$
+    \State $C^{**} \gets C^*$
+    \Comment{Lưu lời giải tốt nhất tìm được trong vòng lặp này}
+
+    \For{$i = 1$ to $m$}
+        \Comment{--- MOVE: di chuyển một điểm sang uav khác ---}
+        \For{$p \in C^*_i$}
+            \For{$j = 1$ to $m$, $j \ne i$}
+                \State $C' \gets C^*$
+                \State Di chuyển $p$ từ $C'_i$ sang $C'_j$ 
+                \State $newCost \gets \text{Cost}(C')$
+                \If{$newCost < bestCost$}
+                    \State $C^{**} \gets C'$
+                    \State $bestCost \gets newCost$
+                    \State $improved \gets true$
+                \EndIf
+            \EndFor
+        \EndFor
+    \EndFor
+
+    \For{$i = 1$ to $m$}
+        \Comment{--- SWAP: hoán đổi điểm giữa hai uav ---}
+        \For{$j = i+1$ to $m$}
+            \For{$p \in C^*_i$}
+                \For{$q \in C^*_j$}
+                    \State $C' \gets C^*$
+                    \State Hoán đổi $p$ và $q$
+                    \State $newCost \gets \text{Cost}(C')$
+                    \If{$newCost < bestCost$}
+                        \State $C^{**} \gets C'$
+                        \State $bestCost \gets newCost$
+                        \State $improved \gets true$
+                    \EndIf
+                \EndFor
+            \EndFor
+        \EndFor
+    \EndFor
+    \State $C^* \gets C^{**}$
+\EndWhile
+
+\State \Return $C^*$
+
+\end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Pha 2: Route Extend}
+
+Từ phân tích ở phần trước, có thể thấy là để đảm bảo 100\% tỷ lệ truyền thông điệp thành công, thì độ dài của lộ trình dài nhất không được vượt quá $\frac 1 3 TTL \times V_{uav}$. 
+Việc giải bài toán H-mTSP có thể tối thiểu hóa được lộ trình dài nhất, tuy nhiên nó không đảm bảo được độ dài lộ trình dài nhất không lớn hơn ngưỡng trên.
+Việc này ảnh hưởng đến tỷ lệ truyền thành công của các nút, đặc biệt là những nút ở đầu và ở cuối lộ trình của các uav (tính từ điểm trung chuyến).
+
+Trong trường hợp xấu: 
+\begin{itemize}
+  \item Với nút ở đầu lộ trình, uav vừa rời đi thì nút tạo thông điệp mới, thông điệp đó phải đợi một khoảng $l_{max}$ để uav quay lại và chờ trong bộ đệm một khoảng tương đương $l_{max}$ để được đưa đến điểm trung chuyển.
+  \item Với nút ở cuối lộ trình uav, một thông điệp gửi đến nút đó phải chờ thêm một khoảng tương đương $l_{max}$ để được đưa từ điểm trung chuyển đến đích.
+\end{itemize}
+
+Nhận thấy rằng sau khi giải bài toán H-mTSP, một số uav có lộ trình ngắn hơn, và theo chiến lược trung chuyển ảo, những uav này sẽ phải chờ các uav khác tại điểm trung chuyển rồi mới có thể đi một vòng lộ trình của mình. 
+Những uav này có thể tận dụng thời gian chờ có thể mở rộng lộ trình của mình để đi đến các nút ở đầu lộ trình, không chỉ của chính nó, mà có thể của các uav khác nữa, để hỗ trợ thu thập thêm các thông điệp mới được tạo tại các nút này.
+Tuy nhiên các uav này vẫn phải đảm bảo truyền thông điệp đến các nút trong lộ trình ban đầu của bản thân kịp thời hạn, và chỉ nhận nhiệm vụ hỗ trợ thu thập tại các nút mới, nên các nút mới này sẽ chỉ được thêm vào cuối lộ trình của một uav, sau khi chúng đã đi hết các nút cần phục vụ trong lộ trình ban đầu của mình và bên cạnh đó phải đảm bảo không làm tăng độ dài lộ trình vượt quá $l_{\max}$.
+Ngoài ra, sau khi đi hết lộ trình ban đầu, thì thời gian để uav đến điểm trung chuyển là không nhiều, khi này nếu một nút được uav phục vụ, thì các thông điệp lấy được từ nút đó đều sẽ được chuyển đến trung chuyển rất nhanh, do vậy:
+\begin{itemize}
+  \item Một nút cần hỗ trợ thu thập là một nút ở đầu lộ trình của các uav tìm được qua pha 1, cụ thể hơn, khoảng cách theo lộ trình từ điểm trung chuyển đến nút này $< \frac 1 2 l_{max}$. Nút càng ở gần đầu lộ trình thì càng cần được ưu tiên.
+  \item Một nút cần hỗ trợ thu thập chỉ cần được hỗ trợ bởi một uav.
+\end{itemize}
+
+Từ các kết luận trên, ta có thể phát biểu bài báo Route Extend như sau:
+
+Cho $m$ lộ trình \( \{R_i\}_{k=1}^m \) (có được từ pha H-mTSP), trong đó mỗi lộ trình có dạng
+$R_k = (h, p_{k,1}, p_{k,2}, \dots, p_{k,\ell_k}, h)$,
+với $h \in \mathbb{R}^2$ là điểm trung chuyển đã được xác định trước. $l_k$ là độ dài của lộ trình $R_k$, và $l_{\max}$ là makespan độ dài lộ trình dài nhất. Và $n'$ nút cần hỗ trợ $U = \{u_1, u_2, \dots, u_n'\} \subset P$, mỗi nút $u_i$ được gán một giá trị ưu tiên $priority(u_i) > 0$, ứng với mức độ quan trọng của việc hỗ trợ nút đó.
+
+Mục tiêu của bài toán là mở rộng các lộ trình hiện có bằng cách chèn thêm một số nút từ $U$ vào cuối mỗi lộ trình (trước khi quay về hub), sao cho thu được các lộ trình mới, sao cho:
+\begin{itemize}
+  \item Mỗi nút $u_i \in U$ được chèn vào nhiều nhất một lộ trình.
+  \item Độ dài của mỗi lộ trình mở rộng không vượt quá makespan ban đầu:
+
+  $l'_k \leq l_{\max}, \quad \forall k = 1, \dots, m$
+  \item Tổng mức độ hỗ trợ là lớn nhất:
+\end{itemize}
+
+Do bài toán có các ràng buộc mạnh, không phải nút nào cũng có thể hỗ trợ được, khiến việc tìm một thuật toán tối ưu hóa và biểu diễn lời giải thích hợp trở nên khó khăn. Để đơn giản hơn, ta có thể sử dụng thuật toán luyện kim cùng heurisic tham lam để ước lượng một lời giải tốt cho bài toán này.
+
+{\bfseries Chuẩn bị}
+
+Đầu tiên, ta chọn chiều di chuyển cho các uav. Trong hai chiều của lộ trình, ta chọn chiều có khoảng cách từ điểm trung chuyển đến nút đầu tiên là nhỏ hơn. Chiều di chuyển này giúp giảm thời gian một thông điệp phải chờ trong bộ đệm của UAV khi đi từ trung chuyển đến nút đích, đồng thời tạo ra nhiều cơ hội cho việc thêm nút vào lộ trình.
+
+Sau đó, ta lọc ra các nút cần hỗ trợ, là các nút mà theo lộ trình hiện tại, khoảng cách từ điểm trung chuyển đến chúng, đi theo chiều đã xác định ở trên, nhỏ hơn nửa độ dài lộ trình dài nhất hay $d_{route}(hub,node) < \frac 1 2 l_{max}$. Nút càng gần điểm trung chuyển thì càng cần hỗ trợ:
+\begin{equation}
+priority(node) = \frac 1 2 l_{max} - d_{route}(hub,node)
+\end{equation}
+Giá trị này giúp các uav cố gắng hỗ trợ các nút cần được ưu tiên hơn, thay vì cố gắng hỗ trợ nhiều nút nhất có thể.
+
+{\bfseries Chiến lược tham lam}
+
+Một phương án chèn được biểu diễn bởi thứ tự xét các nút cần hỗ trợ. Với một thứ tự cho trước, ta thực hiện chèn tham lam như sau: với mỗi nút, tìm lộ trình đầu tiên có thể chèn nút đó vào cuối mà không vi phạm ràng buộc độ dài. Nếu tìm được, thực hiện chèn, ngược lại, bỏ qua nút đó. Độ tốt của phương án là tổng độ ưu tiên của các nút được chèn: Thuật toán \ref{alg:greedy_insertion}.
+
+\begin{algorithm}
+\caption{Chèn tham lam dưới ràng buộc độ dài}
+\label{alg:greedy_insertion}
+\begin{algorithmic}[1]
+
+\Require Danh sách nút cần hỗ trợ $U$ (theo thứ tự), các lộ trình $R_1, \dots, R_m$, ngưỡng độ dài $L_{\max}$
+\Ensure Tổng thưởng $Reward$, Các lộ trình mới $R'_1, \dots, R'_m$
+
+\State $Reward \gets 0$
+
+\For{$u \in U$}
+    \For{$i = 1$ to $m$}
+        \State $R'_i \gets R_i$
+        \State Thêm $u$ vào cuối $R'_i$
+        \State Tính độ dài mới $l'_i$
+
+        \If{$l'_i \le L_{\max}$}
+            \State $R_i \gets R'_i$
+            \State $Reward \gets Reward + priority(u)$
+            \State \textbf{break}
+        \EndIf
+    \EndFor
+\EndFor
+
+\State \Return $Reward$, $R'_1, \dots, R'_m$
+
+\end{algorithmic}
+\end{algorithm}
+
+{\bfseries Sử dụng thuật toán luyện kim}
+
+Không gian nghiệm của bài toán là tất cả các hoán vị của tập nút cần hỗ trợ $U \subset P$. 
+Mỗi nghiệm tương ứng với một thứ tự chèn và có thể đánh giá độ tốt thông qua thuật toán chèn tham lam đã trình bày ở trên. Với mỗi nghiệm $X = (u_1, \dots, u_{n'})$, ta áp dụng thuật toán \ref{alg:greedy_insertion} để có được tổng thưởng $Reward(X)$. 
+Giá trị này được chuẩn hóa:
+\begin{equation}
+\overline{Reward}(X) = \frac{Reward(X)}{\sum_{u \in U} priority(u)}.
+\end{equation}
+
+Hàm chi phí tương ứng là:
+\begin{equation}
+ReCost(X) = -\overline{Reward}(X).
+\end{equation}
+
+Nghiệm lân cận được tạo ra bằng việc đảo ngẫu nhiên một đoạn con trong hoán vị. Cụ thể, chọn ngẫu nhiên hai vị trí $i < j$ và đảo ngược thứ tự các phần tử trong đoạn $[i, j]$:
+\[
+(u_1, \dots, u_i, \dots, u_j, \dots, u_{n'})
+\;\rightarrow\;
+(u_1, \dots, u_j, \dots, u_i, \dots, u_{n'}).
+\]
+
+Thuật toán luyện kim được sử dụng để tìm kiếm một thứ tự chèn tốt hơn. Tại mỗi vòng lặp, một nghiệm lân cận được sinh ra và được chấp nhận theo tiêu chí xác suất phụ thuộc vào nhiệt độ: Thuật toán \ref{alg:sa_route_extend}
+
+\begin{algorithm}
+\caption{Simulated Annealing cho bài toán Route Extend}
+\label{alg:sa_route_extend}
+\begin{algorithmic}[1]
+
+\Require Tập nút $U$, nhiệt độ ban đầu $T_0$, hệ số làm nguội $\alpha$, số vòng lặp $I$, hàm chi phí $Cost$
+\Ensure Nghiệm tối ưu tìm được $X^*$
+
+\State $X \gets RandomShuffle(U)$
+\State $X^* \gets X$
+\State $Cost^* \gets Cost(X)$
+\State $T \gets T_0$
+
+\For{$iter = 1$ to $I$}
+    \State Sinh nghiệm lân cận $X'$
+    \State $\Delta \gets Cost(X') - Cost(X)$
+
+    \If{$\Delta < 0$}
+        \State $X \gets X'$
+    \Else
+        \State $accept \gets true$ với xác suất $\exp(-\Delta / T)$
+        \If{$accept == true$}
+            \State $X \gets X'$
+        \EndIf
+    \EndIf
+
+    \If{$ReCost(X) < Cost^*$}
+        \State $X^* \gets X$
+        \State $Cost^* \gets ReCost(X)$
+    \EndIf
+
+    \State $T \gets \alpha \cdot T$
+\EndFor
+
+\State \Return $X^*$
+
+\end{algorithmic}
+\end{algorithm}
+
+\begin{figure}%
+    \centering
+    \subfloat[\centering Hub mTSP]{{\includegraphics[width=0.45\textwidth]{image/pathplan_1.png} }}%
+    \qquad
+    \subfloat[\centering Route Extend]{{\includegraphics[width=0.45\textwidth]{image/pathplan_2.png} }}%
+    \caption{Lộ trình tìm được qua 2 pha của thuật toán}%
+    \label{fig:example}%
+\end{figure}
+
+\subsubsection{Xây dựng bảng định tuyến}
+
+Từ lộ trình đã tìm được, một bảng định tuyến được xây để các nút biết được những thông điệp nào cần trao đổi cho nhau. Một lưu ý nhỏ là bảng định tuyến này không nằm ở tầng network như trong mạng truyền thống mà nằm ở tầng ứng dụng, nó quyết định thông điệp nào cần chuyển tiếp khi gặp gỡ các nút lân cận. Thông điệp là một gói dữ liệu lớn, trái ngược với các gói tin packet nhỏ và rời rạc.
+Ở đây, ta chỉ cần sử dụng các lộ trình $\{R_1, \dots, R_m\}$ tìm được ở pha H-mTSP, vì ở pha RE, các uav chỉ có nhiệm vụ hỗ trợ thu thập. Bảng định tuyến là giống nhau với mọi nút trong mạng.
+
+Các entry của bảng định tuyến có dạng: $\{u, v, hop(u, v)\}$, trong đó $hop(u, v)$ là khoảng cách hay số lần một thông điệp phải nhảy từ nút $u$ để đi đến nút $v$. Dựa trên cấu trúc trung chuyển và các lộ trình UAV, giá trị $hop(u, v)$ được xác định như sau:
+
+\begin{itemize}
+  \item Hop từ một nút đến chính nó là 0
+  \item Hop từ một uav đến các nút mặt đất trong lộ trình của nó là 1
+  \item Hop từ một uav đến các nút mặt đất còn lại là 2
+  \item Hop của một nút mặt đất đến một nút mặt đất trong cùng lộ trình $R_i$ là 2
+  \item Hop của một nút mặt đất đến các nút mặt đất còn lại là 3
+\end{itemize}
+
+Khi xét thông điệp nào cần chuyển tiếp cho nút hàng xóm, nút mạng (cả uav và nút mặt đất) chỉ cần so sánh hop của mình đến đích của thông điệp và hop của nút hàng xóm đến đích của thông điệp.
+
+\subsubsection{Đồng bộ lịch trình di chuyển của các UAV}
+
+Đề xuất quan trọng của đề tài là chiến lược {\bfseries điểm trung chuyển ảo}, thay vì sử dụng một UAV đứng yên làm trung chuyển, các UAV sẽ đợi nhau ở điểm trung chuyển, trao đổi rồi mới phân tản ra để truyền các thông điệp đến đích, đồng thời thu thập các thông điệp mới. 
+
+Nhưng tại sao lại phải như vậy ? Hãy xét các trường hợp tốt nhất và xấu nhất của hai chiến lược trung chuyển ảo và thực, với giả thiết lộ trình các UAV được chia sẻ cân bằng với độ dài $L$.
+Ta xét nút A là nút tạo thông điệp, ở đầu lộ trình của UAV 1, nút B là đích đến của thông điệp được tạo, ở cuối lộ trình của UAV 2. 
+
+Dễ thấy trường hợp tốt nhất của cả hai chiến lược đều là khi UAV 1 vừa đến thì nút A tạo thông điệp mới, và UAV 1 đến điểm trung chuyển thì UAV 2 cũng có mặt ở đó. Thông điệp sẽ phải chờ một khoảng tương đương $L$ để từ A đến trung chuyển và thêm một khoảng $L$ nữa để từ trung chuyển đến B.
+
+Trường hợp xấu nhất của chiến lược trung chuyển ảo đã được phân tích trước đó, ở đây, thông điệp sẽ phải chờ một khoảng tương đương $3L$. Còn với chiến lược trung chuyển thực, thì trường hợp xấu nhất là khi UAV 1 vừa rời đi thì nút A tạo thông điệp mới, thông điệp phải chờ một khoảng $2L$ để UAV 1 quay lại A rồi lại đi đến trung chuyển, khi UAV 2 vừa rời khỏi trung chuyển thì UAV 1 lại đến đó, thông điệp lại phải chờ một khoảng $2L$ để UAV 2 quay lại trung chuyển, rồi đi đến B. Tổng hợp lại, với trường hợp xấu nhất thì thông điệp trong chiến lược trung chuyển thực phải chờ một khoảng tương đương $4L$. Cách duy nhất để có thể cải thiện là phân chia nhiệm vụ không đồng đều cho các UAV, nhưng chính việc này phá vỡ yêu cầu phân chia nhiệm vụ một cách cân bằng để các nút được phục vụ một cách công bằng.
+
+Ngoài ra, việc sử dụng điểm trung chuyển thực tạo ra một nút thắt cổ chai do nút mạng ở trung chuyển phải chứa rất nhiều thông điệp.
+
+Từ phân tích trên có thể thấy chiến lược trung chuyển ảo là chiến lược tối ưu hơn. Và với thông tin lộ trình đã có được từ hai pha quy hoạch, ta thực hiện đồng bộ lịch trình di chuyển cho các UAV như sau:
+
+Ta có $l_{max}$ là độ dài lộ trình dài nhất của các UAV, các UAV trước khi được triển khai để hỗ trợ truyền thông sẽ thống nhất với nhau các mốc thời gian $T = \{t_1, t_2, \dots\}$, với:
+\begin{equation}
+  t_i - t_{i-1} = \frac{l_{max}}{ v_{uav}}
+\end{equation}
+Các UAV khi đến điểm trung chuyển, sẽ chờ đến mốc thời gian gần nhất rồi bay đi theo lộ trình của mình và lặp lại.
+
+\subsection{Tổng kết chương}
+
+Chương 3 đã trình bày toàn diện về giao thức trao đổi gói tin cùng với trọng tâm là cơ chế hoạt động của đề xuất H-mTSP-RE, một thuật toán quy hoạch lộ trình nhằm đảm bảo sự công bằng trong việc truyền thông giữa tất cả các nút mạng bị cô lập.
+
+TODO
+
+
+% * Phần 4 ===============================================================
+\section{Triển khai hệ thống mô phỏng và thử nghiệm}
+\subsection{Môi trường triển khai và công cụ}
+\subsubsection{Network simulator 3}
+\subsubsection{Cấu hình phần cứng và môi trường chạy}
+
+\subsection{Cấu hình thử nghiệm}
+\subsubsection{Cấu hình các kịch bản}
+\subsubsection{Tham số cho các thuật toán tối ưu hóa}
+
+\subsection{Kết quả và phân tích}
+\subsubsection{Tổng quan}
+\subsubsection{Kết quả trên các kịch bản với số lượng uav thay đổi}
+\subsubsection{Kết quả trên các kịch bản với dung lượng bộ đệm thay đổi}
+
+\subsection{Tổng kết chương}
+
+% * Phần 5 ===============================================================
+\section{Kết luận và hướng phát triển}
+\subsection{Đóng góp chính của H-mTSP-RE}
+\subsection{Hạn chế}
+\subsection{Hướng nghiên cứu tiếp theo}
+\subsection{Tổng kết chương}
+
+\newpage
+\section*{Tổng kết}
+\addcontentsline{toc}{section}{Tổng kết}
+
+\newpage
+\renewcommand{\refname}{\vspace{-1cm}}
+\section*{Tài liệu tham khảo}
+\addcontentsline{toc}{section}{Tài liệu tham khảo}
+\printbibliography
+\end{document}

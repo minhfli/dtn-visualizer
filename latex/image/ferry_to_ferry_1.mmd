@@ -1,0 +1,26 @@
+---
+config:
+  theme: redux-color
+  sequence:
+    actorMargin: 200
+---
+sequenceDiagram
+    participant UAV_L as UAV_L (IP thấp)
+    participant UAV_H as UAV_H (IP cao)
+
+    loop Broadcast định kỳ
+        UAV_L ->> UAV_H: BEACON
+        UAV_H ->> UAV_L: BEACON
+    end
+
+    UAV_L ->> UAV_H: FERRY_HELLO
+    UAV_H ->> UAV_L: FERRY_HELLO
+
+    alt Cả hai đều đầy bộ đệm
+        Note over UAV_L,UAV_H: Giao thức kết thúc
+    else UAV_H chưa đầy bộ đệm
+        Note over UAV_L: UAV_L trở thành TokenOwner
+    else UAV_H đầy bộ đệm
+        UAV_L ->> UAV_H: ACCEPT_TRANSFER
+        Note over UAV_H: UAV_H trở thành TokenOwner
+    end

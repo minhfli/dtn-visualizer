@@ -1,0 +1,31 @@
+---
+config:
+  theme: redux-color
+  sequence:
+    actorMargin: 300
+---
+sequenceDiagram
+    participant UAV
+    participant Ground
+
+    loop Broadcast định kỳ
+        UAV ->> Ground: BEACON
+    end
+
+    Ground ->> UAV: GROUND_HELLO
+    loop UAV có thông điệp đến Ground
+        UAV ->> Ground: BUNDLE
+        Ground -->> UAV: BUNDLE_ACK_AAT
+    end
+
+    UAV ->> Ground: FERRY_HELLO
+
+    loop Ground có thông điệp đến UAV
+        Ground ->> UAV: BUNDLE
+        alt UAV còn bộ đệm
+            UAV -->> Ground: BUNDLE_ACK_AAT
+        else UAV đã đầy bộ đệm
+            UAV -->> Ground: BUNDLE_ACK
+            Note over Ground,UAV: Giao thức kết thúc
+        end
+    end

@@ -1,4 +1,4 @@
-\contentsline {algorithm}{\numberline {1}{\ignorespaces Tinh chỉnh vị trí hub}}{24}{algorithm.1}%
-\contentsline {algorithm}{\numberline {2}{\ignorespaces Local Search H-mTSP}}{28}{algorithm.2}%
-\contentsline {algorithm}{\numberline {3}{\ignorespaces Chèn tham lam dưới ràng buộc độ dài}}{30}{algorithm.3}%
-\contentsline {algorithm}{\numberline {4}{\ignorespaces Simulated Annealing cho bài toán Route Extend}}{32}{algorithm.4}%
+\contentsline {algorithm}{\numberline {1}{\ignorespaces Tinh chỉnh vị trí hub}}{34}{algorithm.1}%
+\contentsline {algorithm}{\numberline {2}{\ignorespaces Local Search H-mTSP}}{37}{algorithm.2}%
+\contentsline {algorithm}{\numberline {3}{\ignorespaces Chèn tham lam dưới ràng buộc độ dài}}{40}{algorithm.3}%
+\contentsline {algorithm}{\numberline {4}{\ignorespaces Simulated Annealing cho bài toán Route Extend}}{41}{algorithm.4}%

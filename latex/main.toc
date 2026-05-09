@@ -1,56 +1,67 @@
+\acswitchoff 
 \babel@toc {vietnamese}{}\relax 
 \contentsline {section}{Lời cảm ơn}{1}{section*.2}%
 \contentsline {section}{Lời cam đoan}{2}{section*.3}%
 \contentsline {section}{Tóm tắt}{3}{section*.4}%
-\contentsline {section}{\numberline {1}Giới thiệu}{7}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Bối cảnh và mục tiêu nghiên cứu}{7}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Phạm vi và giới hạn của đề tài}{7}{subsection.1.2}%
-\contentsline {subsubsection}{\numberline {1.2.1}Phạm vi nghiên cứu}{7}{subsubsection.1.2.1}%
-\contentsline {subsubsection}{\numberline {1.2.2}Giới hạn của đề tài}{8}{subsubsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.3}Đóng góp chính của đề tài}{8}{subsection.1.3}%
-\contentsline {subsection}{\numberline {1.4}Cấu trúc của đồ án}{8}{subsection.1.4}%
-\contentsline {section}{\numberline {2}Cơ sở lý thuyết và các nghiên cứu liên quan}{8}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Delay Tolerant Network và Message Ferry Network}{8}{subsection.2.1}%
-\contentsline {subsubsection}{\numberline {2.1.1}Delay Tolerant Network}{8}{subsubsection.2.1.1}%
-\contentsline {subsubsection}{\numberline {2.1.2}Bundle Protocol}{9}{subsubsection.2.1.2}%
-\contentsline {subsubsection}{\numberline {2.1.3}Message Ferry Network}{9}{subsubsection.2.1.3}%
-\contentsline {subsection}{\numberline {2.2}Các thuật toán tối ưu hóa}{10}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}Thuật toán di truyền}{10}{subsubsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}Thuật toán luyện kim}{10}{subsubsection.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.3}Các heuristic cho bài toán TSP}{10}{subsubsection.2.2.3}%
-\contentsline {subsection}{\numberline {2.3}Các nghiên cứu liên quan}{10}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Giải pháp đề xuất}{10}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Đặt vấn đề và tổng quan đề xuất}{10}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Giao thức trao đổi bundle}{11}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Các gói tin trong giao thức}{12}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}Giao thức trao đổi giữa nút mặt đất và UAV}{13}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.3}Giao thức trao đổi giữa 2 UAV}{14}{subsubsection.3.2.3}%
-\contentsline {paragraph}{Bắt tay: Thiết lập nút có quyền gửi trước}{15}{section*.10}%
-\contentsline {paragraph}{Trao đổi thông điệp và quyền gửi}{16}{section*.11}%
-\contentsline {subsection}{\numberline {3.3}Thuật toán quy hoạch lộ trình 2 pha H-mTSP-RE (Hub m-Traveling Saleman Problem and Route Extend)}{17}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Ý tưởng của thuật toán}{17}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}Pha 1: Hub mTSP}{18}{subsubsection.3.3.2}%
-\contentsline {paragraph}{Hàm chi phí: Mục tiêu tối ưu}{20}{section*.13}%
-\contentsline {subsubsection}{\numberline {3.3.3}Pha 2: Route Extend}{27}{subsubsection.3.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.4}Xây dựng bảng định tuyến}{31}{subsubsection.3.3.4}%
-\contentsline {subsubsection}{\numberline {3.3.5}Đồng bộ lịch trình di chuyển của các UAV}{33}{subsubsection.3.3.5}%
-\contentsline {subsection}{\numberline {3.4}Tổng kết chương}{34}{subsection.3.4}%
-\contentsline {section}{\numberline {4}Triển khai hệ thống mô phỏng và thử nghiệm}{35}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Môi trường triển khai và công cụ}{35}{subsection.4.1}%
-\contentsline {subsubsection}{\numberline {4.1.1}Network simulator 3}{35}{subsubsection.4.1.1}%
-\contentsline {subsubsection}{\numberline {4.1.2}Cấu hình phần cứng và môi trường chạy}{35}{subsubsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.2}Cấu hình thử nghiệm}{35}{subsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}Cấu hình các kịch bản}{35}{subsubsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.2}Tham số cho các thuật toán tối ưu hóa}{35}{subsubsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.3}Kết quả và phân tích}{35}{subsection.4.3}%
-\contentsline {subsubsection}{\numberline {4.3.1}Tổng quan}{35}{subsubsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.3.2}Kết quả trên các kịch bản với số lượng uav thay đổi}{35}{subsubsection.4.3.2}%
-\contentsline {subsubsection}{\numberline {4.3.3}Kết quả trên các kịch bản với dung lượng bộ đệm thay đổi}{35}{subsubsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.4}Tổng kết chương}{35}{subsection.4.4}%
-\contentsline {section}{\numberline {5}Kết luận và hướng phát triển}{35}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Đóng góp chính của H-mTSP-RE}{35}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Hạn chế}{35}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Hướng nghiên cứu tiếp theo}{35}{subsection.5.3}%
-\contentsline {subsection}{\numberline {5.4}Tổng kết chương}{35}{subsection.5.4}%
-\contentsline {section}{Tổng kết}{36}{section*.16}%
-\contentsline {section}{Tài liệu tham khảo}{37}{section*.17}%
+\contentsline {section}{Danh sách bảng biểu}{6}{section*.6}%
+\contentsline {section}{Danh sách hình ảnh}{7}{section*.7}%
+\contentsline {section}{Danh sách thuật toán}{8}{section*.8}%
+\contentsline {section}{\numberline {1}Giới thiệu}{9}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Bối cảnh và mục tiêu nghiên cứu}{9}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Phạm vi và giới hạn của đề tài}{10}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Đóng góp chính của khóa luận}{12}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Cấu trúc của khóa luận}{13}{subsection.1.4}%
+\contentsline {section}{\numberline {2}Cơ sở lý thuyết và các nghiên cứu liên quan}{13}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Delay Tolerant Network và Message Ferry Network}{13}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Delay Tolerant Network}{13}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Bundle Protocol}{14}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.3}Message Ferry Network}{14}{subsubsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.2}Các thuật toán tối ưu hóa}{15}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Thuật toán di truyền}{15}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Thuật toán luyện kim}{15}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Các heuristic cho bài toán TSP}{16}{subsubsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.3}Các nghiên cứu liên quan}{17}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Giải pháp đề xuất}{18}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Đặt vấn đề}{18}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Giao thức trao đổi thông điệp}{20}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Các gói tin trong giao thức}{21}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Giao thức trao đổi giữa nút mặt đất và UAV}{23}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Giao thức trao đổi giữa 2 UAV}{24}{subsubsection.3.2.3}%
+\contentsline {paragraph}{Bắt tay: Thiết lập nút có quyền gửi trước}{25}{section*.10}%
+\contentsline {paragraph}{Trao đổi thông điệp và quyền gửi}{25}{section*.11}%
+\contentsline {subsection}{\numberline {3.3}Thuật toán quy hoạch lộ trình 2 pha, định tuyến thông điệp và lập lịch di chuyển VH-mTSP-RE (Virtual Hub m-Traveling Saleman Problem and Route Extend)}{27}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Ý tưởng của thuật toán}{27}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Pha 1: Hub mTSP}{28}{subsubsection.3.3.2}%
+\contentsline {paragraph}{Hàm chi phí: Mục tiêu tối ưu}{30}{section*.13}%
+\contentsline {paragraph}{Tìm điểm trung chuyển:}{33}{section*.14}%
+\contentsline {paragraph}{Chromosome: Biểu diễn lời giải}{34}{section*.15}%
+\contentsline {paragraph}{Các kỹ thuật di truyền được sử dụng}{35}{section*.17}%
+\contentsline {paragraph}{Tìm kiếm cục bộ (local search): cải thiện kết quả tìm được}{36}{section*.18}%
+\contentsline {subsubsection}{\numberline {3.3.3}Pha 2: Route Extend}{36}{subsubsection.3.3.3}%
+\contentsline {paragraph}{Chuẩn bị}{39}{section*.19}%
+\contentsline {paragraph}{Chiến lược tham lam}{39}{section*.20}%
+\contentsline {paragraph}{Sử dụng thuật toán luyện kim}{40}{section*.21}%
+\contentsline {subsubsection}{\numberline {3.3.4}Lập lịch di chuyển của các UAV}{41}{subsubsection.3.3.4}%
+\contentsline {subsubsection}{\numberline {3.3.5}Thuật toán định tuyến thông điệp}{43}{subsubsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.4}Tổng kết chương}{44}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Triển khai hệ thống mô phỏng và thử nghiệm}{45}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Môi trường triển khai và công cụ}{45}{subsection.4.1}%
+\contentsline {paragraph}{Network simulator 3}{45}{section*.23}%
+\contentsline {paragraph}{Cấu hình phần cứng và môi trường}{45}{section*.24}%
+\contentsline {subsection}{\numberline {4.2}Cấu hình thực nghiệm}{46}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Tham số cho các thuật toán tối ưu hóa}{49}{subsubsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.3}Các thông số đánh giá}{50}{subsection.4.3}%
+\contentsline {paragraph}{Tỷ lệ truyền thành công - Delivery Ratio (DR)}{50}{section*.30}%
+\contentsline {paragraph}{Tỉ lệ giao tiếp kém - Low Connection Ratio (LCR) - và không thể giao tiếp - Dead Connection Ratio (DCR)}{50}{section*.31}%
+\contentsline {paragraph}{Độ trễ trung bình - Average Delay of Top x\%}{51}{section*.32}%
+\contentsline {subsection}{\numberline {4.4}Kết quả và phân tích}{52}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Kết quả trên các kịch bản với số lượng uav thay đổi}{52}{subsubsection.4.4.1}%
+\contentsline {paragraph}{Tổng quan kết quả}{52}{section*.33}%
+\contentsline {subsubsection}{\numberline {4.4.2}Kết quả trên các kịch bản với dung lượng bộ đệm thay đổi}{52}{subsubsection.4.4.2}%
+\contentsline {paragraph}{Tổng quan kết quả}{53}{section*.42}%
+\contentsline {subsection}{\numberline {4.5}Tổng kết chương}{53}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Kết luận và hướng phát triển}{53}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Kết luận}{53}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Hạn chế}{53}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Hướng nghiên cứu tiếp theo}{54}{subsection.5.3}%
+\contentsline {section}{Tài liệu tham khảo}{55}{section*.43}%

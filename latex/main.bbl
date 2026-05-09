@@ -19,6 +19,189 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global/global}
+    \entry{ns3-epidemic-2015}{inproceedings}{}{}
+      \name{author}{4}{}{%
+        {{hash=2990621eef86f2f5b47920bfee32fab9}{%
+           family={Alenazi},
+           familyi={A\bibinitperiod},
+           given={Mohammed\bibnamedelimb J.\bibnamedelimi F.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=83bebbc27e4004769881c489d38e9ad5}{%
+           family={Cheng},
+           familyi={C\bibinitperiod},
+           given={Yufei},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=cda4a315f0fd0df71e313b3924551b18}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Dongsheng},
+           giveni={D\bibinitperiod}}}%
+        {{hash=fa52c69b364d986285341133e307829f}{%
+           family={Sterbenz},
+           familyi={S\bibinitperiod},
+           given={James\bibnamedelimb P.\bibnamedelimi G.},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {ACM}%
+      }
+      \strng{namehash}{db8b1b465dcabad648eda95af0231d0a}
+      \strng{fullhash}{9390c322c8d72c84d8f78a28a0a7c4b4}
+      \strng{fullhashraw}{9390c322c8d72c84d8f78a28a0a7c4b4}
+      \strng{bibnamehash}{db8b1b465dcabad648eda95af0231d0a}
+      \strng{authorbibnamehash}{db8b1b465dcabad648eda95af0231d0a}
+      \strng{authornamehash}{db8b1b465dcabad648eda95af0231d0a}
+      \strng{authorfullhash}{9390c322c8d72c84d8f78a28a0a7c4b4}
+      \strng{authorfullhashraw}{9390c322c8d72c84d8f78a28a0a7c4b4}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 2015 Workshop on ns-3}
+      \field{month}{5}
+      \field{series}{WNS3 2015}
+      \field{title}{Epidemic routing protocol implementation in ns-3}
+      \field{year}{2015}
+      \field{pages}{83\bibrangedash 90}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1145/2756509.2756523
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1145/2756509.2756523
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1145/2756509.2756523
+      \endverb
+    \endentry
+    \entry{pigeon}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{hash=9b80a6b6e5ed19751d236dbd01433cee}{%
+           family={Barroca},
+           familyi={B\bibinitperiod},
+           given={Cintia},
+           giveni={C\bibinitperiod}}}%
+        {{hash=fdc46ed0824f2ab9f015a690385808a5}{%
+           family={Grilo},
+           familyi={G\bibinitperiod},
+           given={António},
+           giveni={A\bibinitperiod}}}%
+        {{hash=28db2b53c5f43e53c32033552baf95d2}{%
+           family={Pereira},
+           familyi={P\bibinitperiod},
+           given={Paulo\bibnamedelima Rogério},
+           giveni={P\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{95b81b9f30d3615f66d704cd5e09623a}
+      \strng{fullhash}{95b81b9f30d3615f66d704cd5e09623a}
+      \strng{fullhashraw}{95b81b9f30d3615f66d704cd5e09623a}
+      \strng{bibnamehash}{95b81b9f30d3615f66d704cd5e09623a}
+      \strng{authorbibnamehash}{95b81b9f30d3615f66d704cd5e09623a}
+      \strng{authornamehash}{95b81b9f30d3615f66d704cd5e09623a}
+      \strng{authorfullhash}{95b81b9f30d3615f66d704cd5e09623a}
+      \strng{authorfullhashraw}{95b81b9f30d3615f66d704cd5e09623a}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2018 16th International Conference on Intelligent Transportation Systems Telecommunications (ITST)}
+      \field{title}{Improving Message Delivery in UAV-based Delay Tolerant Networks}
+      \field{year}{2018}
+      \field{pages}{1\bibrangedash 7}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1109/ITST.2018.8566956
+      \endverb
+      \keyw{Delays;Urban areas;Routing;Genetic algorithms;Sociology;Statistics;Relays}
+    \endentry
+    \entry{epp}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{hash=ff36918ed8170419c67c915a48b7fba9}{%
+           family={Harounabadi},
+           familyi={H\bibinitperiod},
+           given={Mehdi},
+           giveni={M\bibinitperiod}}}%
+        {{hash=5e1bb8fbc5434b0ebf9ad1d49f7d7dfd}{%
+           family={Bocksberger},
+           familyi={B\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=9bebd026f46214952c0e51aaf22fdbbc}{%
+           family={Mitschele-Thiel},
+           familyi={M\bibinithyphendelim T\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{0f857e97281271e0f1aa0abdd0536804}
+      \strng{fullhash}{0f857e97281271e0f1aa0abdd0536804}
+      \strng{fullhashraw}{0f857e97281271e0f1aa0abdd0536804}
+      \strng{bibnamehash}{0f857e97281271e0f1aa0abdd0536804}
+      \strng{authorbibnamehash}{0f857e97281271e0f1aa0abdd0536804}
+      \strng{authornamehash}{0f857e97281271e0f1aa0abdd0536804}
+      \strng{authorfullhash}{0f857e97281271e0f1aa0abdd0536804}
+      \strng{authorfullhashraw}{0f857e97281271e0f1aa0abdd0536804}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2018 IEEE 29th Annual International Symposium on Personal, Indoor and Mobile Radio Communications (PIMRC)}
+      \field{title}{Evolutionary Path Planning for Multiple UAVs in Message Ferry Networks Applying Genetic Algorithm}
+      \field{year}{2018}
+      \field{pages}{1\bibrangedash 7}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1109/PIMRC.2018.8580936
+      \endverb
+      \keyw{Path planning;Delays;Genetic algorithms;Wireless communication;Wireless sensor networks;Mobile nodes}
+    \endentry
+    \entry{tabaf}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=ff36918ed8170419c67c915a48b7fba9}{%
+           family={Harounabadi},
+           familyi={H\bibinitperiod},
+           given={Mehdi},
+           giveni={M\bibinitperiod}}}%
+        {{hash=9bebd026f46214952c0e51aaf22fdbbc}{%
+           family={Mitschele-Thiel},
+           familyi={M\bibinithyphendelim T\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Springer Science}%
+        {Business Media LLC}%
+      }
+      \strng{namehash}{a969a412f403408018a77076e197f3e6}
+      \strng{fullhash}{a969a412f403408018a77076e197f3e6}
+      \strng{fullhashraw}{a969a412f403408018a77076e197f3e6}
+      \strng{bibnamehash}{a969a412f403408018a77076e197f3e6}
+      \strng{authorbibnamehash}{a969a412f403408018a77076e197f3e6}
+      \strng{authornamehash}{a969a412f403408018a77076e197f3e6}
+      \strng{authorfullhash}{a969a412f403408018a77076e197f3e6}
+      \strng{authorfullhashraw}{a969a412f403408018a77076e197f3e6}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1572-8153}
+      \field{journaltitle}{Mobile Networks and Applications}
+      \field{month}{3}
+      \field{number}{5}
+      \field{title}{Applying Message Forwarding and Replication to Multi-UAV Message Ferry Networks}
+      \field{volume}{23}
+      \field{year}{2018}
+      \field{pages}{1337\bibrangedash 1346}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1007/s11036-018-1038-7
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1007/s11036-018-1038-7
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1007/s11036-018-1038-7
+      \endverb
+    \endentry
     \entry{ns3-epidemic-2018}{inproceedings}{}{}
       \name{author}{2}{}{%
         {{hash=6f0f14f95f96fc1021b6a423f5018312}{%
@@ -68,6 +251,104 @@
       \verb https://doi.org/10.1145/3199902.3199907
       \endverb
       \keyw{DTN,MANET routing,ad-hoc networks,delay-tolerant networking,disruption-tolerant networking,epidemic model implementation,epidemic routing,network simulation,ns-3}
+    \endentry
+    \entry{fpod}{inproceedings}{}{}
+      \name{author}{6}{}{%
+        {{hash=8a4c61e3a9b0d4c2aeca3bef66273e81}{%
+           family={Xiong},
+           familyi={X\bibinitperiod},
+           given={Xuanrui},
+           giveni={X\bibinitperiod}}}%
+        {{hash=bbfc991bc00531c14fb698ccc32e4f05}{%
+           family={Jia},
+           familyi={J\bibinitperiod},
+           given={Yumei},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=a93b8226adf7f0cb3e5e0e30fbc9c177}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Yuan},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=5a147490f078fd678f5f333ec4a118c3}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Nong},
+           giveni={N\bibinitperiod}}}%
+        {{hash=a6b15c9823c2a9627d7b362914904c63}{%
+           family={Xi},
+           familyi={X\bibinitperiod},
+           given={Juan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ae021641a8f85fd2607152ab99ed115b}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Fan},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{c71a7007c86d4093154dda5510ff9456}
+      \strng{fullhash}{83dbe990ff5b198fdd70bec28510580e}
+      \strng{fullhashraw}{83dbe990ff5b198fdd70bec28510580e}
+      \strng{bibnamehash}{c71a7007c86d4093154dda5510ff9456}
+      \strng{authorbibnamehash}{c71a7007c86d4093154dda5510ff9456}
+      \strng{authornamehash}{c71a7007c86d4093154dda5510ff9456}
+      \strng{authorfullhash}{83dbe990ff5b198fdd70bec28510580e}
+      \strng{authorfullhashraw}{83dbe990ff5b198fdd70bec28510580e}
+      \field{sortinit}{X}
+      \field{sortinithash}{1965c258adceecf23ce3d67b05113442}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2021 4th International Conference on Information Communication and Signal Processing (ICICSP)}
+      \field{title}{A Ferry Path Online Decision Method Based on Estimation of Message Packet Generation Rate}
+      \field{year}{2021}
+      \field{pages}{483\bibrangedash 488}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/ICICSP54369.2021.9611987
+      \endverb
+      \keyw{Structural panels;Power supplies;Simulation;Estimation;Signal processing;Unmanned aerial vehicles;Delays;Cruise path;Online decision method;Post disaster;Delay Tolerant Networks;UAV}
+    \endentry
+    \entry{mrt}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=4be62463c6bbd4876f8fceaf19e1edcf}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Zhen},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=0dee79af85d4a589629404fc6652988c}{%
+           family={Fei},
+           familyi={F\bibinitperiod},
+           given={Zongming},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{cda2d3f97877d0ed99902a41333d23f8}
+      \strng{fullhash}{cda2d3f97877d0ed99902a41333d23f8}
+      \strng{fullhashraw}{cda2d3f97877d0ed99902a41333d23f8}
+      \strng{bibnamehash}{cda2d3f97877d0ed99902a41333d23f8}
+      \strng{authorbibnamehash}{cda2d3f97877d0ed99902a41333d23f8}
+      \strng{authornamehash}{cda2d3f97877d0ed99902a41333d23f8}
+      \strng{authorfullhash}{cda2d3f97877d0ed99902a41333d23f8}
+      \strng{authorfullhashraw}{cda2d3f97877d0ed99902a41333d23f8}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2007 IEEE Wireless Communications and Networking Conference}
+      \field{title}{Route Design for Multiple Ferries in Delay Tolerant Networks}
+      \field{year}{2007}
+      \field{pages}{3460\bibrangedash 3465}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/wcnc.2007.635
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1109/WCNC.2007.635
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1109/WCNC.2007.635
+      \endverb
     \endentry
   \enddatalist
 \endrefsection

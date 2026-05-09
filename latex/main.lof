@@ -1,9 +1,19 @@
+\acswitchoff 
 \babel@toc {vietnamese}{}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Quy trình thức trao đổi giữa nút mặt đất và UAV}}{15}{figure.caption.9}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Quy trình bắt tay (a) và trao đổi (b) trong giao thức trao đổi giữa 2 UAV}}{17}{figure.caption.12}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {\centering Bắt tay}}}{17}{subfigure.2.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {\centering Trao đổi}}}{17}{subfigure.2.2}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Biểu diễn nhiễm sắc thể}}{25}{figure.caption.14}%
-\contentsline {figure}{\numberline {4}{\ignorespaces Lộ trình tìm được qua 2 pha của thuật toán}}{32}{figure.caption.15}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {\centering Hub mTSP}}}{32}{subfigure.4.1}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {\centering Route Extend}}}{32}{subfigure.4.2}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Quy trình thức trao đổi giữa nút mặt đất và UAV}}{24}{figure.caption.9}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Quy trình bắt tay (a) và trao đổi (b) trong giao thức trao đổi giữa 2 UAV}}{26}{figure.caption.12}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {\centering Bắt tay}}}{26}{subfigure.2.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {\centering Trao đổi}}}{26}{subfigure.2.2}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Biểu diễn nhiễm sắc thể}}{35}{figure.caption.16}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Lộ trình tìm được qua 2 pha của thuật toán}}{42}{figure.caption.22}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {\centering Hub mTSP}}}{42}{subfigure.4.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {\centering Route Extend}}}{42}{subfigure.4.2}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Ảnh chụp vệ tinh vùng lũ ngày 11/7/2025 tại huyện Tuy An, tỉnh Phú Yên, tọa độ 13°20'21.54"N 109°13'28.29"E (Nguồn: Google Earth)}}{46}{figure.caption.26}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Kết quả thực nghiệm kịch bản 1.a}}{57}{figure.caption.34}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Kết quả thực nghiệm kịch bản 2.a}}{58}{figure.caption.35}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Kết quả thực nghiệm kịch bản 3.a}}{59}{figure.caption.36}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Kết quả thực nghiệm kịch bản 4.a}}{60}{figure.caption.37}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Kết quả thực nghiệm kịch bản 1.b}}{61}{figure.caption.38}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Kết quả thực nghiệm kịch bản 2.b}}{62}{figure.caption.39}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Kết quả thực nghiệm kịch bản 3.b}}{63}{figure.caption.40}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Kết quả thực nghiệm kịch bản 4.b}}{64}{figure.caption.41}%
